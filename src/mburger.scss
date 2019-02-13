@@ -1,0 +1,269 @@
+/*
+ * mburger CSS v1.0.0
+ * mmenujs.com/mburger
+ *	
+ * Copyright (c) Fred Heusschen
+ * www.frebsite.nl
+ *
+ * License: CC-BY-4.0
+ * http://creativecommons.org/licenses/by/4.0/
+ */
+
+
+/** Classname for the hamburger icon. */
+$module : '.mburger';
+
+/** Classname for the ancestor element when the menu is opened. */
+$opened : '.mm-wrapper_opened';
+
+
+/** Whether or not to include the CSS for the "collapse" animation. */
+$opt_collapse	: true;
+
+/** Whether or not to include the CSS for the "spin" animation. */
+$opt_spin 		: true;
+
+/** Whether or not to include the CSS for the "squeeze" animation. */
+$opt_squeeze	: true;
+
+/** Whether or not to include the CSS for the "tornado" animation. */
+$opt_tornado	: true;
+
+
+
+#{$module} {
+
+	//	Variables
+	--mb-bar-height	: 4px;
+	--mb-bar-width	: 40%;
+
+	//	Button
+	display: block;
+	position: relative;
+	box-sizing: border-box;
+	width: 60px;
+	height: 60px;
+	padding: 0;
+	margin: 0;
+	border: none;
+	appearance: none;
+	background: transparent;
+	color: inherit;
+	cursor: pointer;
+
+	//	Hamburger
+	span {
+		display: block;
+		position: absolute;
+		left: calc( ( 100% - var( --mb-bar-width ) ) / 2 );
+		width: var( --mb-bar-width );
+		height: var( --mb-bar-height );
+		border-radius: calc( var( --mb-bar-height ) / 2 );
+		background: currentColor;
+		opacity: 1;
+
+		//	Bar 1
+		&:nth-child(1) {
+			bottom: calc( 50% + ( var( --mb-bar-height ) * 2 ) );
+			transition: bottom 0.2s ease, transform 0.2s ease;
+		}
+
+		//	Bar 2
+		&:nth-child(2) {
+			top: calc( 50% - ( var( --mb-bar-height ) / 2 ) );
+			transition: opacity 0.2s ease;
+		}
+
+		//	Bar 3
+		&:nth-child(3) {
+			top: calc( 50% + ( var( --mb-bar-height ) * 2 ) );
+			transition: top 0.2s ease, transform 0.2s ease;
+		}
+	}
+}
+
+//	Cross
+#{$opened} #{$module} {
+	span {
+		&:nth-child(1) {
+			bottom: calc( 50% - ( var( --mb-bar-height ) / 2 ) );
+			transform: rotate( 45deg );
+		}
+		&:nth-child(2) {
+			opacity: 0;
+		}
+		&:nth-child(3) {
+			top: calc( 50% - ( var( --mb-bar-height ) / 2 ) );
+			transform: rotate( -45deg );
+		}
+	}
+}
+
+
+//	Collapse animation
+@if ( $opt_collapse ) {
+
+	//	Hamburger
+	#{$module} {
+		&--collapse {
+			span {
+				&:nth-child(1) {
+					transition: bottom 0.2s ease, margin 0.2s ease, transform 0.2s ease;
+					transition-delay: 0.2s, 0s, 0s;
+				}
+				&:nth-child(2) {
+					transition: top 0.2s ease, opacity 0s ease;
+					transition-delay: 0.3s, 0.3s;
+				}
+				&:nth-child(3) {
+					transition: top 0.2s ease, transform 0.2s ease;
+				}
+			}
+		}
+	}
+
+	//	Cross
+	#{$opened} #{$module} { 
+		&--collapse {
+			span {
+				&:nth-child(1) {
+					bottom: calc( 50% - ( var( --mb-bar-height ) * 3) );
+					margin-bottom: calc( var( --mb-bar-height ) * 2.5 );
+					transform: rotate( 45deg );
+					transition-delay: 0.1s, 0.3s, 0.3s;
+				}
+				&:nth-child(2) {
+					top: calc( 50% + ( var( --mb-bar-height ) * 2 ) );
+					opacity: 0;
+					transition-delay: 0s, 0.2s;
+				}
+				&:nth-child(3) {
+					top: calc( 50% - ( var( --mb-bar-height ) / 2 ) );
+					transform: rotate( -45deg );
+					transition-delay: 0.3s, 0.3s;
+				}
+			}
+		}
+	}
+}
+
+
+//	Spin animation
+@if ( $opt_spin ) {
+
+	//	Hamburger
+	#{$module} {
+		&--spin {
+			span {
+				&:nth-child(1) {
+					transition-delay: 0.2s, 0s;
+				}
+				&:nth-child(2) {
+					transition-duration: 0s;
+					transition-delay: 0.2s;
+				}
+				&:nth-child(3) {
+					transition-delay: 0.2s, 0s;
+				}
+			}
+		}
+	}
+
+	//	Cross
+	#{$opened} #{$module} { 
+		&--spin {
+			span {
+				&:nth-child(1) {
+					transform: rotate( 135deg );
+					transition-delay: 0s, 0.2s;
+				}
+				&:nth-child(3) {
+					transform: rotate( 225deg );
+					transition-delay: 0s, 0.2s;
+				}
+			}
+		}
+	}
+}
+
+
+//	Squeeze animation
+@if ( $opt_squeeze ) {
+
+	//	Hamburger
+	#{$module} {
+		&--squeeze {
+			span {
+				&:nth-child(1) {
+					transition-delay: 0.1s, 0s;
+				}
+				&:nth-child(2) {
+					transition-delay: 0.1s;
+				}
+				&:nth-child(3) {
+					transition-delay: 0.1s, 0s;
+				}
+			}
+		}
+	}
+
+	//	Cross
+	#{$opened} #{$module} { 
+		&--squeeze {
+			span {
+				&:nth-child(1),
+				&:nth-child(3) {
+					transition-delay: 0s, 0.1s;
+				}
+			}
+		}
+	}
+}
+
+
+//	Tornado animation
+@if ( $opt_tornado ) {
+
+	//	Hamburger
+	#{$module} {
+		&--tornado {
+			span {
+				&:nth-child(1) {
+					transition: bottom 0.2s ease, transform 0.2s ease;
+					transition-delay: 0.2s;
+				}
+				&:nth-child(2) {
+					transition: opacity 0s ease, transform 0.2s ease;
+					transition-delay: 0.1s, 0.1s;
+				}
+				&:nth-child(3) {
+					transition: top 0.2s ease, transform 0.2s ease;
+					transition-delay: 0s;
+				}
+			}
+		}
+	}
+
+	//	Cross
+	#{$opened} #{$module} { 
+		&--tornado {
+			span {
+				&:nth-child(1) {
+					bottom: calc( 50% - ( var( --mb-bar-height ) / 2) );
+					transform: rotate( -135deg );
+					transition-delay: 0s;
+				}
+				&:nth-child(2) {
+					opacity: 0;
+					transform: rotate( -135deg );
+					transition-delay: 0.4s, 0.1s;
+				}
+				&:nth-child(3) {
+					top: calc( 50% - ( var( --mb-bar-height ) / 2 ) );
+					transform: rotate( -225deg );
+					transition-delay: 0.2s;
+				}
+			}
+		}
+	}
+}

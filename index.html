@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="author" content="www.frebsite.nl" />
+		<meta content="width=600px user-scalable=yes" name="viewport" />
+		<meta name="robots" content="noindex, nofollow" />
+
+		<title>mburger, CSS animated hamburgers!</title>
+
+		<link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Pacifico" />
+		<link type="text/css" rel="stylesheet" href="bin/demo.css" />
+		<link type="text/css" rel="stylesheet" href="dist/mburger.css" />
+	</head>
+	<body>
+		<div id="page">
+
+			<h1>mburger</h1>
+			<p>A small collection of CSS animated hamburgers. 
+				All set up to work out of the box with the mmenu.js plugin. 
+				Click a hamburger to see the animation.
+				More info <a href="https://www.mmenujs.com/mburger" target="_blank">here</a>.</p>
+
+			<div class="xmpls">
+
+				<div class="xmpl">
+					<button class="mburger mburger--collapse">
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+					<span>collapse</span>
+				</div>
+				<div class="xmpl">
+					<button class="mburger mburger--spin">
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+					<span>spin</span>
+				</div>
+				<div class="xmpl">
+					<button class="mburger mburger--squeeze">
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+					<span>squeeze</span>
+				</div>
+				<div class="xmpl">
+					<button class="mburger mburger--tornado">
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+					<span>tornado</span>
+				</div>
+			</div>
+
+			<h3>Customize the hamburger</h3>
+			<p>By default, the hamburger adopts to its environment pretty good,
+				the bars scale to fit and inherit their <code>color</code> for the parent element.</p>
+			<p>For more examples and the full documentation please visit: <a href="https://www.mmenujs.com/mburger" target="_blank">mmenujs.com/mburger</a>.</p>
+
+		</div>
+
+		<script>
+			document.addEventListener('click', ( evnt ) => {
+				var target = evnt.target;
+				if ( target.matches('.xmpl') || target.closest('.xmpl') ) {
+					target.closest('.xmpl').classList.toggle( 'mm-wrapper_opened' );
+				}
+			});
+		</script>
+	</body>
+</html>
