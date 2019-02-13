@@ -4,7 +4,7 @@ mburger CSS
 A small collection of CSS animated hamburgers. All set up to work out of the box with the mmenu.js plugin.<br />
 [Examples](https://www.mmenujs.com/mburger)
 
-<img src="https://mmenujs.com/img/preview-3.png" alt="CSS animated hamburgers" width="100%" />
+<img src="https://mmenujs.com/img/preview-mburger.png" alt="CSS animated hamburgers" width="100%" />
 
 ### Customize the hamburger
 By default, the hamburger adopts to its environment pretty good,
