@@ -1,5 +1,5 @@
 /*
- * mburger CSS v1.0.0
+ * mburger CSS v1.0.2
  * mmenujs.com/mburger
  *	
  * Copyright (c) Fred Heusschen
@@ -33,22 +33,36 @@ $opt_tornado	: true;
 
 #{$module} {
 
-	//	Variables
-	--mb-bar-height	: 4px;
-	--mb-bar-width	: 40%;
+	/** Width for the bars, relative to the button. */
+	--mb-bar-width		: 60%;
 
-	//	Button
-	display: block;
-	position: relative;
-	box-sizing: border-box;
+	/** Height for the bars.*/
+	--mb-bar-height		: 4px;
+
+	/** Distance between bars (approximately) */
+	--mb-bar-spacing	: 10px;
+
+	/** Timeout before starting the "cross" animation, ensures the animation starts after the menu is fully opened. */
+	--mb-cross-timeout	: 0.4s;
+
+
+	//	Overridable values
 	width: 60px;
 	height: 60px;
+	background: transparent;
+	border: none;
+	border-radius: 0;
+	color: inherit;
+
+
+	//	Button
+	display: inline-block;
+	position: relative;
+	box-sizing: border-box;
 	padding: 0;
 	margin: 0;
-	border: none;
+	vertical-align: middle;
 	appearance: none;
-	background: transparent;
-	color: inherit;
 	cursor: pointer;
 
 	//	Hamburger
@@ -60,11 +74,12 @@ $opt_tornado	: true;
 		height: var( --mb-bar-height );
 		border-radius: calc( var( --mb-bar-height ) / 2 );
 		background: currentColor;
+		color: inherit;
 		opacity: 1;
 
 		//	Bar 1
 		&:nth-child(1) {
-			bottom: calc( 50% + ( var( --mb-bar-height ) * 2 ) );
+			bottom: calc( 50% + var( --mb-bar-spacing ) );
 			transition: bottom 0.2s ease, transform 0.2s ease;
 		}
 
@@ -76,7 +91,7 @@ $opt_tornado	: true;
 
 		//	Bar 3
 		&:nth-child(3) {
-			top: calc( 50% + ( var( --mb-bar-height ) * 2 ) );
+			top: calc( 50% + var( --mb-bar-spacing ) );
 			transition: top 0.2s ease, transform 0.2s ease;
 		}
 	}
@@ -127,20 +142,27 @@ $opt_tornado	: true;
 		&--collapse {
 			span {
 				&:nth-child(1) {
-					bottom: calc( 50% - ( var( --mb-bar-height ) * 3) );
-					margin-bottom: calc( var( --mb-bar-height ) * 2.5 );
+					bottom: calc( 50% - var( --mb-bar-spacing ) - var( --mb-bar-height ) );
+					margin-bottom: calc( var( --mb-bar-spacing ) + ( var( --mb-bar-height ) / 2 ) );
 					transform: rotate( 45deg );
-					transition-delay: 0.1s, 0.3s, 0.3s;
+					transition-delay: 
+						calc( var( --mb-cross-timeout ) + 0.1s ),
+						calc( var( --mb-cross-timeout ) + 0.3s ), 
+						calc( var( --mb-cross-timeout ) + 0.3s );
 				}
 				&:nth-child(2) {
-					top: calc( 50% + ( var( --mb-bar-height ) * 2 ) );
+					top: calc( 50% + var( --mb-bar-spacing ) );
 					opacity: 0;
-					transition-delay: 0s, 0.2s;
+					transition-delay: 
+						calc( var( --mb-cross-timeout ) + 0s ),
+						calc( var( --mb-cross-timeout ) + 0.2s );
 				}
 				&:nth-child(3) {
 					top: calc( 50% - ( var( --mb-bar-height ) / 2 ) );
 					transform: rotate( -45deg );
-					transition-delay: 0.3s, 0.3s;
+					transition-delay: 
+						calc( var( --mb-cross-timeout ) + 0.3s ),
+						calc( var( --mb-cross-timeout ) + 0.3s );
 				}
 			}
 		}
@@ -175,11 +197,18 @@ $opt_tornado	: true;
 			span {
 				&:nth-child(1) {
 					transform: rotate( 135deg );
-					transition-delay: 0s, 0.2s;
+					transition-delay: 
+						calc( var( --mb-cross-timeout ) + 0s ),
+						calc( var( --mb-cross-timeout ) + 0.2s );
+				}
+				&:nth-child(2) {
+					transition-delay: calc( var( --mb-cross-timeout ) + 0s );
 				}
 				&:nth-child(3) {
 					transform: rotate( 225deg );
-					transition-delay: 0s, 0.2s;
+					transition-delay: 
+						calc( var( --mb-cross-timeout ) + 0s ),
+						calc( var( --mb-cross-timeout ) + 0.2s );
 				}
 			}
 		}
@@ -211,9 +240,18 @@ $opt_tornado	: true;
 	#{$opened} #{$module} { 
 		&--squeeze {
 			span {
-				&:nth-child(1),
+				&:nth-child(1) {
+					transition-delay: 
+						calc( var( --mb-cross-timeout ) + 0s ),
+						calc( var( --mb-cross-timeout ) + 0.1s );
+				}
+				&:nth-child(2) {
+					transition-delay: calc( var( --mb-cross-timeout ) + 0s );
+				}
 				&:nth-child(3) {
-					transition-delay: 0s, 0.1s;
+					transition-delay: 
+						calc( var( --mb-cross-timeout ) + 0s ),
+						calc( var( --mb-cross-timeout ) + 0.1s );
 				}
 			}
 		}
@@ -249,19 +287,19 @@ $opt_tornado	: true;
 		&--tornado {
 			span {
 				&:nth-child(1) {
-					bottom: calc( 50% - ( var( --mb-bar-height ) / 2) );
 					transform: rotate( -135deg );
-					transition-delay: 0s;
+					transition-delay: calc( var( --mb-cross-timeout ) + 0s );
 				}
 				&:nth-child(2) {
 					opacity: 0;
 					transform: rotate( -135deg );
-					transition-delay: 0.4s, 0.1s;
+					transition-delay: 
+						calc( var( --mb-cross-timeout ) + 0.4s ),
+						calc( var( --mb-cross-timeout ) + 0.1s );
 				}
 				&:nth-child(3) {
-					top: calc( 50% - ( var( --mb-bar-height ) / 2 ) );
 					transform: rotate( -225deg );
-					transition-delay: 0.2s;
+					transition-delay: calc( var( --mb-cross-timeout ) + 0.2s );
 				}
 			}
 		}

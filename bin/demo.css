@@ -81,17 +81,14 @@ a:hover {
 		padding-top: calc( 25% - 20px );
 	}
 }
-
+.xmpl .mburger {
+	--mb-cross-timeout: 0s;
+}
 .xmpl button {
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-}
-.xmpl .mburger {
-	--mb-bar-height: 5px;
-	width: 100px;
-	height: 100px;
 }
 .xmpl span {
 	position: absolute;
