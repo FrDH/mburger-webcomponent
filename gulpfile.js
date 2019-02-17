@@ -1,52 +1,56 @@
 /*
 	Tasks:
 
-	$ gulp 					: Runs "css" tasks.
-	$ gulp watch			: Starts a watch on "css" tasks.
+	$ gulp 					: Runs all tasks.
+	$ gulp watch			: Starts a watch on all tasks.
+	$ gulp css				: Runs "css" task.
+	$ gulp webcomponent		: Runs "webcomponent" tasks.
 */
 
 
-var { src, dest, watch } = require( 'gulp' );
+const { src, dest, watch, parallel, series } = require( 'gulp' );
 
-var sass 		= require( 'gulp-sass' ),
-	cleancss	= require( 'gulp-clean-css' );
-
-
-var inputDir 	= 'src',
-	outputDir 	= 'dist';
+const sass 		= require( 'gulp-sass' );
+const cleancss	= require( 'gulp-clean-css' );
+const concat	= require( 'gulp-concat' );
 
 
+const inputDir 	= 'src';
+const outputDir = 'dist';
+const binDir 	= 'bin';
 
 
-/*
-	$ gulp
-*/
-const defaultTask = ( cb ) => {
-	return css( cb );
-};
-exports.default = defaultTask;
-
-
-/*
-	$ gulp watch
-*/
-const watchTask = ( cb ) => {
-	return watch( inputDir + '/**/*.scss', css );
-};
-exports.watch = watchTask;
-
-
-
-/*
-	CSS tasks.
-*/
-
-// Compile and concatenate all SCSS files to CSS.
 const css = ( cb ) => {
-
-	return src( inputDir + '/*.scss' )
+	return src( inputDir + '/mburger.scss' )
 		.pipe( sass().on( 'error', sass.logError ) )
 		.pipe( cleancss() )
 		.pipe( dest( outputDir ) );
 };
 
+const webcomponentCss = ( cb ) => {
+	return src( inputDir + '/webcomponent.scss' )
+		.pipe( sass().on( 'error', sass.logError ) )
+		.pipe( cleancss() )
+		.pipe( dest( binDir ) );
+};
+
+const webcomponentConcat = ( cb ) => {
+	return src([
+		binDir + '/webcomponent-prefix.txt',
+		binDir + '/webcomponent.css',
+		binDir + '/webcomponent-affix.txt'
+	])
+	.pipe( concat( 'mburger.js' ) )
+	.pipe( dest( outputDir ) );
+};
+
+const webcomponent = series( webcomponentCss, webcomponentConcat );
+
+const watchTask = ( cb ) => {
+	return watch( inputDir + '/**/*.scss', parallel( css, webcomponent ) );
+};
+
+exports.default = parallel( css, webcomponent );
+exports.watch = watchTask;
+exports.css = css;
+exports.webcomponent = webcomponent;

@@ -1,0 +1,45 @@
+	</style>
+
+	<span></span>
+	<span></span>
+	<span></span>`;
+
+customElements.define( 'm-burger',
+	class extends HTMLElement {
+		constructor() {
+			super();
+
+			var content = mBurger.content.cloneNode( true );
+
+			//	Attach shadow DOM
+			this.attachShadow({ mode: 'open' })
+				.appendChild( content );
+
+			this.menu = null;
+
+		}
+
+		static get observedAttributes() {
+			return [ 'menu' ];
+		}
+
+		attributeChangedCallback( name, oldValue, newValue ) {
+			if ( name == 'menu' ) {
+				this.menu = ( this.hasAttribute( 'menu' ) )
+					? document.getElementById( this.getAttribute( 'menu' ) )
+					: null;
+			}
+		}
+
+		connectedCallback() {
+			this.addEventListener( 'click', ( evnt ) => {
+				if ( this.menu && this.menu.classList.contains( 'mm-menu' ) ) {
+					let API = this.menu.mmenu;
+					if ( API.open ) {
+						API.open();
+					}
+				}
+			});
+		}
+	}
+);

@@ -1,0 +1,3 @@
+export const mBurger = document.createElement( 'template' );
+mBurger.innerHTML = `
+	<style>

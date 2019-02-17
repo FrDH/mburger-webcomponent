@@ -1,6 +1,6 @@
 {
 	"name": "mburger-css",
-	"version": "1.0.2",
+	"version": "1.1.0",
 	"main": "dist/mburger.css",
 	"author": "Fred Heusschen <info@frebsite.nl>",
 	"license": "CC-BY-4.0",
@@ -24,6 +24,7 @@
 	"devDependencies": {
 		"gulp": "^4.0.0",
 		"gulp-clean-css": "^4.0.0",
+		"gulp-concat": "^2.6.1",
 		"gulp-sass": "^4.0.2"
 	}
 }
