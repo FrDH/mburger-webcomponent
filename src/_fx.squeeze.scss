@@ -2,7 +2,7 @@
 
 	//	Hamburger
 	#{$mb_module_squeeze} {
-		span {
+		b {
 			&:nth-of-type(1) {
 				transition-delay: 0.1s, 0s;
 			}
@@ -17,7 +17,7 @@
 
 	//	Cross
 	#{$mb_module_squeeze_opened} { 
-		span {
+		b {
 			&:nth-of-type(1) {
 				transition-delay: 
 					calc( var( --mb-cross-timeout ) + 0s ),

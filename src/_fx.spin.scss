@@ -2,7 +2,7 @@
 
 	//	Hamburger
 	#{$mb_module_spin} {
-		span {
+		b {
 			&:nth-of-type(1) {
 				transition-delay: 0.2s, 0s;
 			}
@@ -18,7 +18,7 @@
 
 	//	Cross
 	#{$mb_module_spin_opened} { 
-		span {
+		b {
 			&:nth-of-type(1) {
 				transform: rotate( 135deg );
 				transition-delay: 

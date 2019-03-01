@@ -2,7 +2,7 @@
 
 	//	Hamburger
 	#{$mb_module_tornado} {
-		span {
+		b {
 			&:nth-of-type(1) {
 				transition: bottom 0.2s ease, transform 0.2s ease;
 				transition-delay: 0.2s;
@@ -20,7 +20,7 @@
 
 	//	Cross
 	#{$mb_module_tornado_opened} { 
-		span {
+		b {
 			&:nth-of-type(1) {
 				transform: rotate( -135deg );
 				transition-delay: calc( var( --mb-cross-timeout ) + 0s );

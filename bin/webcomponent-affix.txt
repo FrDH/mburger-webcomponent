@@ -1,8 +1,9 @@
 	</style>
 
-	<span></span>
-	<span></span>
-	<span></span>`;
+	<b></b>
+	<b></b>
+	<b></b>
+	<span><slot></slot></span>`;
 
 customElements.define( 'm-burger',
 	class extends HTMLElement {
@@ -25,8 +26,8 @@ customElements.define( 'm-burger',
 
 		attributeChangedCallback( name, oldValue, newValue ) {
 			if ( name == 'menu' ) {
-				this.menu = ( this.hasAttribute( 'menu' ) )
-					? document.getElementById( this.getAttribute( 'menu' ) )
+				this.menu = ( newValue )
+					? document.getElementById( newValue )
 					: null;
 			}
 		}
