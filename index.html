@@ -119,8 +119,7 @@
 		<script>
 			document.addEventListener('click', ( evnt ) => {
 				var target = evnt.target;
-				console.log(target)
-				if ( target.matches('.xmpl') || target.closest('.xmpl') ) {
+				if ( target.closest('.xmpl') ) {
 					target.closest('.xmpl').classList.toggle( 'mm-wrapper_opened' );
 				}
 			});
