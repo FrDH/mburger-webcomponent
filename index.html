@@ -18,11 +18,11 @@
 		<div id="page">
 
 			<h1>mburger</h1>
-			<p>A small collection of CSS animated hamburgers. 
-				All set up to work out of the box with the mmenu.js plugin. 
+			<p>A small collection of CSS animated hamburgers.
+				All set up to work out of the box with the mmenu.js plugin.
 				Click a hamburger to see the animation.
 				More info <a href="https://www.mmenujs.com/mburger" target="_blank">here</a>.</p>
- 
+
 			<div class="xmpls">
 
 				<div class="xmpl">
@@ -58,18 +58,27 @@
 					<span>tornado</span>
 				</div>
 
-<!-- 
-				<div class="xmpl">
-					<m-burger>Menu</m-burger>
-				</div>
- -->
+			 </div>
 
- 			</div>
+<pre>
+&lt;html&gt;
+   &lt;head&gt;
+      &lt;style type="text/css" rel="stylesheet" href="dist/mburger.css"&gt;
+   &lt;/heady&gt;
+   &lt;body&gt;
+      &lt;button class="mburger mburger--spin" href="#my-menu"&gt;
+         &lt;b&lt;/b&gt;
+         &lt;b&lt;/b&gt;
+         &lt;b&lt;/b&gt;
+      &lt;/button&gt;
+   &lt;/body&gt;
+&lt;/html&gt;
+</pre>
 
 			<h3>Customize the hamburger</h3>
 			<p>By default, the hamburger adopts to its environment pretty good,
 				the bars scale to fit and inherit their <code>color</code> for the parent element.</p>
-			<p>The hamburger is pretty easy to customize too, 
+			<p>The hamburger is pretty easy to customize too,
 				just override some of the CSS values and variables.</p>
 
 			<div class="xmpls">
@@ -81,7 +90,6 @@
 							<b></b>
 							<span>Menu</span>
 						</span>
-						
 					</button>
 				</div>
 
@@ -102,6 +110,19 @@
 			<h3>Native webcomponent</h3>
 			<p>Note that -at the time of writing (early 2019)- the native webcomponent is only (fully) supported in Chrome.</p>
 
+			<div class="xmpls">
+				<div class="xmpl">
+					<m-burger fx="collapse"></m-burger>
+					<span>collapse</span>
+				</div>
+
+				<div class="xmpl">
+					<m-burger fx="spin"></m-burger>
+					<span>spin</span>
+				</div>
+
+			</div>
+
 <pre>
 &lt;html&gt;
    &lt;head&gt;
@@ -115,12 +136,21 @@
 
 		</div>
 
-
 		<script>
 			document.addEventListener('click', ( evnt ) => {
 				var target = evnt.target;
-				if ( target.closest('.xmpl') ) {
-					target.closest('.xmpl').classList.toggle( 'mm-wrapper_opened' );
+				let xmpl = target.closest('.xmpl');
+				if ( xmpl ) {
+					let webcomponent = xmpl.querySelector( 'm-burger' );
+					if ( webcomponent ) {
+						if ( webcomponent.getAttribute( 'state' ) ) {
+							webcomponent.removeAttribute( 'state' );
+						} else {
+							webcomponent.setAttribute( 'state', 'cross' );
+						}
+					} else {
+						xmpl.classList.toggle( 'mm-wrapper_opened' );
+					}
 				}
 			});
 		</script>

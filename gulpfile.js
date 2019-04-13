@@ -7,50 +7,66 @@
 	$ gulp webcomponent		: Runs "webcomponent" tasks.
 */
 
+const { src, dest, watch, parallel, series } = require('gulp');
 
-const { src, dest, watch, parallel, series } = require( 'gulp' );
+const sass = require('gulp-sass');
+const cleancss = require('gulp-clean-css');
+// const concat = require('gulp-concat');
+const typescript = require('gulp-typescript');
+const replace = require('gulp-replace');
+const fs = require('fs');
 
-const sass 		= require( 'gulp-sass' );
-const cleancss	= require( 'gulp-clean-css' );
-const concat	= require( 'gulp-concat' );
-
-
-const inputDir 	= 'src';
+const inputDir = 'src';
 const outputDir = 'dist';
-const binDir 	= 'bin';
+const binDir = 'bin';
 
-
-const css = ( cb ) => {
-	return src( inputDir + '/mburger.scss' )
-		.pipe( sass().on( 'error', sass.logError ) )
-		.pipe( cleancss() )
-		.pipe( dest( outputDir ) );
+const css = cb => {
+    return src(inputDir + '/scss/mburger.scss')
+        .pipe(sass().on('error', sass.logError))
+        .pipe(cleancss())
+        .pipe(dest(outputDir));
 };
 
-const webcomponentCss = ( cb ) => {
-	return src( inputDir + '/webcomponent.scss' )
-		.pipe( sass().on( 'error', sass.logError ) )
-		.pipe( cleancss() )
-		.pipe( dest( binDir ) );
+const webcomponentJs = cb => {
+    return src([
+        inputDir + '/ts/*.d.ts', //	Include all typings.
+        inputDir + '/ts/*.ts' // Include the needed ts files.
+    ])
+        .pipe(
+            typescript({
+                target: 'es6',
+                module: 'es6'
+            })
+        )
+        .pipe(dest(binDir));
 };
 
-const webcomponentConcat = ( cb ) => {
-	return src([
-		binDir + '/webcomponent-prefix.txt',
-		binDir + '/webcomponent.css',
-		binDir + '/webcomponent-affix.txt'
-	])
-	.pipe( concat( 'mburger.js' ) )
-	.pipe( dest( outputDir ) );
+const webcomponentCss = cb => {
+    return src(inputDir + '/scss/webcomponent.scss')
+        .pipe(sass().on('error', sass.logError))
+        .pipe(cleancss())
+        .pipe(dest(binDir));
 };
 
-const webcomponent = series( webcomponentCss, webcomponentConcat );
-
-const watchTask = ( cb ) => {
-	return watch( inputDir + '/**/*.scss', parallel( css, webcomponent ) );
+const webcomponentConcat = cb => {
+    var styles = fs.readFileSync(binDir + '/webcomponent.css');
+    return src(binDir + '/mburger.js')
+        .pipe(replace('[__STYLES__]', styles))
+        .pipe(dest(outputDir));
 };
 
-exports.default = parallel( css, webcomponent );
+const webcomponent = series(
+    parallel(webcomponentCss, webcomponentJs),
+    webcomponentConcat
+);
+
+const watchTask = cb => {
+    watch(inputDir + '/scss/*.scss', parallel(css, webcomponent));
+    watch(inputDir + '/ts/*.ts', webcomponent);
+    cb();
+};
+
+exports.default = parallel(css, webcomponent);
 exports.watch = watchTask;
 exports.css = css;
 exports.webcomponent = webcomponent;
