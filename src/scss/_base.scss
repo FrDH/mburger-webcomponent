@@ -11,8 +11,8 @@
     /** Distance between bars (approximately). */
     --mb-bar-spacing: 10px;
 
-    /** Timeout before starting the "cross" animation, ensures the animation starts after the menu is fully opened. */
-    --mb-cross-timeout: $mb_cross_timeout;
+    /** Timeout before starting the animation, ensures the animation starts after the menu is fully opened. */
+    --mb-animate-timeout: #{$mb_animate_timeout};
 }
 
 #{$mb_module} {
@@ -50,7 +50,7 @@
         //	Bar 1
         &:nth-of-type(1) {
             bottom: calc(50% + var(--mb-bar-spacing));
-            transition: bottom 0.2s ease, transform 0.2s ease;
+            transition: bottom 0.2s ease, transform 0.2s ease, width 0.2s ease;
         }
 
         //	Bar 2
@@ -62,20 +62,13 @@
         //	Bar 3
         &:nth-of-type(3) {
             top: calc(50% + var(--mb-bar-spacing));
-            transition: top 0.2s ease, transform 0.2s ease;
+            transition: top 0.2s ease, transform 0.2s ease, width 0.2s ease;
         }
-    }
-
-    //	Text
-    span:not(:empty) {
-        padding-right: calc(
-            var(--mb-button-size) * ((1 - var(--mb-bar-width)) / 2)
-        );
     }
 }
 
 //	Cross
-#{$mb_module_opened} {
+#{$mb_module_cross} {
     b {
         &:nth-of-type(1) {
             bottom: calc(50% - (var(--mb-bar-height) / 2));

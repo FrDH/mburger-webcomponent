@@ -1,5 +1,5 @@
 /*
- * mburger webcomponent CSS v1.3.0
+ * mburger webcomponent v1.3.1
  * mmenujs.com/mburger
  *
  * Copyright (c) Fred Heusschen
@@ -15,22 +15,26 @@ mBurger.innerHTML = `
 	<b></b>
 	<b></b>
 	<b></b>
-	<span><slot></slot></span>`;
+	<slot></slot>`;
 
 customElements.define(
     'm-burger',
     class extends HTMLElement {
-        menu: HTMLElement;
+        /** The menu node. */
+        menuNode: HTMLElement = null;
+
+        /** API for the menu. */
+        menuApi: {
+            bind: Function;
+            open: Function;
+        } = null;
 
         constructor() {
             super();
 
-            var content = mBurger.content.cloneNode(true);
-
             //	Attach shadow DOM
+            var content = mBurger.content.cloneNode(true);
             this.attachShadow({ mode: 'open' }).appendChild(content);
-
-            this.menu = null;
         }
 
         static get observedAttributes() {
@@ -39,31 +43,41 @@ customElements.define(
 
         attributeChangedCallback(name, oldValue, newValue) {
             if (name == 'menu') {
-                this.menu = newValue ? document.getElementById(newValue) : null;
+                //  Set the new menu node and API.
+                this.setMenu(newValue);
 
-                if (this.menu) {
-                    let API = this.menu['mmenu'];
-                    if (API) {
-                        API.bind('open:after', () => {
-                            this.setAttribute('state', 'cross');
-                        });
-                        API.bind('close:after', () => {
-                            this.removeAttribute('state');
-                        });
-                    }
+                //  Change the hamburger state when opening and closing the menu.
+                if (this.menuApi) {
+                    this.menuApi.bind('open:after', () => {
+                        this.setAttribute('state', 'cross');
+                    });
+                    this.menuApi.bind('close:after', () => {
+                        this.removeAttribute('state');
+                    });
                 }
             }
         }
 
         connectedCallback() {
+            //  Open the menu when clicking the hamburger.
             this.addEventListener('click', evnt => {
-                if (this.menu && this.menu.classList.contains('mm-menu')) {
-                    let API = this.menu['mmenu'];
-                    if (API && API.open) {
-                        API.open();
-                    }
+                if (this.menuApi && this.menuApi.open) {
+                    this.menuApi.open();
                 }
             });
+        }
+
+        /**
+         * Set the menu node and API.
+         * @param {string} id The ID-attribute for the menu node.
+         */
+        setMenu(id: string) {
+            this.menuNode = id ? document.getElementById(id) : null;
+            this.menuApi = null;
+            if (this.menuNode) {
+                this.menuApi =
+                    this.menuNode['mmApi'] || this.menuNode['mmenu'] || null;
+            }
         }
     }
 );

@@ -1,6 +1,6 @@
 {
 	"name": "mburger-css",
-	"version": "1.3.0",
+	"version": "1.3.1",
 	"main": "dist/mburger.css",
 	"author": "Fred Heusschen <info@frebsite.nl>",
 	"license": "CC-BY-4.0",

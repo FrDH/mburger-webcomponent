@@ -6,13 +6,13 @@ $mb_module_squeeze: ':host( [fx="squeeze"] )';
 $mb_module_tornado: ':host( [fx="tornado"] )';
 
 // Selector for the button when the menu is opened.
-$mb_module_opened: ':host( [state="cross"] )';
-$mb_module_collapse_opened: ':host( [state="cross"][fx="collapse"] )';
-$mb_module_spin_opened: ':host( [state="cross"][fx="spin"] )';
-$mb_module_squeeze_opened: ':host( [state="cross"][fx="squeeze"] )';
-$mb_module_tornado_opened: ':host( [state="cross"][fx="tornado"] )';
+$mb_module_cross: ':host( [state="cross"] )';
+$mb_module_collapse_cross: ':host( [state="cross"][fx="collapse"] )';
+$mb_module_spin_cross: ':host( [state="cross"][fx="spin"] )';
+$mb_module_squeeze_cross: ':host( [state="cross"][fx="squeeze"] )';
+$mb_module_tornado_cross: ':host( [state="cross"][fx="tornado"] )';
 
-$mb_cross_timeout: 0s;
+$mb_animate_timeout: 0s;
 
 @import 'variables';
 @import 'base';

@@ -1,37 +1,33 @@
-@if ( $mb_fx_squeeze ) {
+@if ($mb_fx_squeeze) {
+    //	Hamburger
+    #{$mb_module_squeeze} {
+        b {
+            &:nth-of-type(1) {
+                transition-delay: 0.1s, 0s;
+            }
+            &:nth-of-type(2) {
+                transition-delay: 0.1s;
+            }
+            &:nth-of-type(3) {
+                transition-delay: 0.1s, 0s;
+            }
+        }
+    }
 
-	//	Hamburger
-	#{$mb_module_squeeze} {
-		b {
-			&:nth-of-type(1) {
-				transition-delay: 0.1s, 0s;
-			}
-			&:nth-of-type(2) {
-				transition-delay: 0.1s;
-			}
-			&:nth-of-type(3) {
-				transition-delay: 0.1s, 0s;
-			}
-		}
-	}
-
-	//	Cross
-	#{$mb_module_squeeze_opened} { 
-		b {
-			&:nth-of-type(1) {
-				transition-delay: 
-					calc( var( --mb-cross-timeout ) + 0s ),
-					calc( var( --mb-cross-timeout ) + 0.1s );
-			}
-			&:nth-of-type(2) {
-				transition-delay: calc( var( --mb-cross-timeout ) + 0s );
-			}
-			&:nth-of-type(3) {
-				transition-delay: 
-					calc( var( --mb-cross-timeout ) + 0s ),
-					calc( var( --mb-cross-timeout ) + 0.1s );
-			}
-		}
-	}
-
+    //	Cross
+    #{$mb_module_squeeze_cross} {
+        b {
+            &:nth-of-type(1) {
+                transition-delay: calc(var(--mb-animate-timeout) + 0s),
+                    calc(var(--mb-animate-timeout) + 0.1s);
+            }
+            &:nth-of-type(2) {
+                transition-delay: calc(var(--mb-animate-timeout) + 0s);
+            }
+            &:nth-of-type(3) {
+                transition-delay: calc(var(--mb-animate-timeout) + 0s),
+                    calc(var(--mb-animate-timeout) + 0.1s);
+            }
+        }
+    }
 }
