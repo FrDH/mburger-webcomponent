@@ -1,5 +1,5 @@
 /*
- * mburger webcomponent v1.3.1
+ * mburger webcomponent v1.3.2
  * mmenujs.com/mburger
  *
  * Copyright (c) Fred Heusschen
@@ -15,24 +15,47 @@ mBurger.innerHTML = `
 	<b></b>
 	<b></b>
 	<slot></slot>`;
-customElements.define('m-burger', class extends HTMLElement {
-    constructor() {
-        super();
-        /** The menu node. */
-        this.menuNode = null;
-        /** API for the menu. */
-        this.menuApi = null;
-        //	Attach shadow DOM
-        var content = mBurger.content.cloneNode(true);
-        this.attachShadow({ mode: 'open' }).appendChild(content);
-    }
-    static get observedAttributes() {
-        return ['menu'];
-    }
-    attributeChangedCallback(name, oldValue, newValue) {
-        if (name == 'menu') {
-            //  Set the new menu node and API.
-            this.setMenu(newValue);
+customElements.define(
+    'm-burger',
+    class extends HTMLElement {
+        constructor() {
+            super();
+            /** The menu node. */
+            this.menuNode = null;
+            /** API for the menu. */
+            this.menuApi = null;
+            //	Attach shadow DOM
+            var content = mBurger.content.cloneNode(true);
+            this.attachShadow({ mode: 'open' }).appendChild(content);
+        }
+        static get observedAttributes() {
+            return ['menu'];
+        }
+        attributeChangedCallback(name, oldValue, newValue) {
+            if (name == 'menu') {
+                //  Set the new menu node and API.
+                this.initMenu(newValue);
+            }
+        }
+        connectedCallback() {
+            //  Open the menu when clicking the hamburger.
+            this.addEventListener('click', evnt => {
+                if (this.menuApi && this.menuApi.open) {
+                    this.menuApi.open();
+                }
+            });
+        }
+        /**
+         * Set the menu node and API.
+         * @param {string} id The ID-attribute for the menu node.
+         */
+        initMenu(id) {
+            this.menuNode = id ? document.getElementById(id) : null;
+            this.menuApi = null;
+            if (this.menuNode) {
+                this.menuApi =
+                    this.menuNode['mmApi'] || this.menuNode['mmenu'] || null;
+            }
             //  Change the hamburger state when opening and closing the menu.
             if (this.menuApi) {
                 this.menuApi.bind('open:after', () => {
@@ -44,24 +67,4 @@ customElements.define('m-burger', class extends HTMLElement {
             }
         }
     }
-    connectedCallback() {
-        //  Open the menu when clicking the hamburger.
-        this.addEventListener('click', evnt => {
-            if (this.menuApi && this.menuApi.open) {
-                this.menuApi.open();
-            }
-        });
-    }
-    /**
-     * Set the menu node and API.
-     * @param {string} id The ID-attribute for the menu node.
-     */
-    setMenu(id) {
-        this.menuNode = id ? document.getElementById(id) : null;
-        this.menuApi = null;
-        if (this.menuNode) {
-            this.menuApi =
-                this.menuNode['mmApi'] || this.menuNode['mmenu'] || null;
-        }
-    }
-});
+);
