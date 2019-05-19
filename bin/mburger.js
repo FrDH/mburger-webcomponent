@@ -1,5 +1,5 @@
 /*
- * mburger webcomponent v1.3.2
+ * mburger webcomponent v1.3.3
  * mmenujs.com/mburger
  *
  * Copyright (c) Fred Heusschen
@@ -31,13 +31,20 @@ customElements.define('m-burger', class extends HTMLElement {
     }
     attributeChangedCallback(name, oldValue, newValue) {
         if (name == 'menu') {
-            //  Set the new menu node and API.
+            //  Initiate the new menu.
             this.initMenu(newValue);
         }
     }
     connectedCallback() {
         //  Open the menu when clicking the hamburger.
         this.addEventListener('click', evnt => {
+            //  If there is no API for a menu available (the menu isn't yet initiated),
+            //  try to initiate the menu.
+            if (!this.menuApi) {
+                this.initMenu();
+            }
+            //  If there is an API for a menu available,
+            //  open the menu.
             if (this.menuApi && this.menuApi.open) {
                 this.menuApi.open();
             }
@@ -45,11 +52,17 @@ customElements.define('m-burger', class extends HTMLElement {
     }
     /**
      * Set the menu node and API.
-     * @param {string} id The ID-attribute for the menu node.
+     * @param {string} [id] The ID-attribute for the menu node.
      */
     initMenu(id) {
-        this.menuNode = id ? document.getElementById(id) : null;
+        this.menuNode = null;
         this.menuApi = null;
+        if (!id) {
+            id = this.getAttribute('menu');
+        }
+        if (id) {
+            this.menuNode = document.getElementById(id);
+        }
         if (this.menuNode) {
             this.menuApi =
                 this.menuNode['mmApi'] || this.menuNode['mmenu'] || null;

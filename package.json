@@ -1,6 +1,6 @@
 {
 	"name": "mburger-css",
-	"version": "1.3.2",
+	"version": "1.3.3",
 	"main": "dist/mburger.css",
 	"module": "dist/mburger.js",
 	"author": "Fred Heusschen <info@mmenujs.com>",
