@@ -1,49 +1,42 @@
-@if ($mb_fx_collapse) {
-    //	Hamburger
-    #{$mb_module_collapse} {
-        b {
-            &:nth-of-type(1) {
-                transition: bottom 0.2s ease, margin 0.2s ease,
-                    transform 0.2s ease;
-                transition-delay: 0.2s, 0s, 0s;
-            }
-            &:nth-of-type(2) {
-                transition: top 0.2s ease, opacity 0s ease;
-                transition-delay: 0.3s, 0.3s;
-            }
-            &:nth-of-type(3) {
-                transition: top 0.2s ease, transform 0.2s ease;
-            }
-        }
+//	Hamburger
+#{$mb_module_collapse} {
+  b {
+    &:nth-of-type(1) {
+      transition: bottom 0.2s ease, margin 0.2s ease, transform 0.2s ease;
+      transition-delay: 0.2s, 0s, 0s;
     }
+    &:nth-of-type(2) {
+      transition: top 0.2s ease, opacity 0s ease;
+      transition-delay: 0.3s, 0.3s;
+    }
+    &:nth-of-type(3) {
+      transition: top 0.2s ease, transform 0.2s ease;
+    }
+  }
+}
 
-    //	Cross
-    #{$mb_module_collapse_cross} {
-        b {
-            &:nth-of-type(1) {
-                bottom: calc(
-                    50% - var(--mb-bar-spacing) - var(--mb-bar-height)
-                );
-                margin-bottom: calc(
-                    var(--mb-bar-spacing) + (var(--mb-bar-height) / 2)
-                );
-                transform: rotate(45deg);
-                transition-delay: calc(var(--mb-animate-timeout) + 0.1s),
-                    calc(var(--mb-animate-timeout) + 0.3s),
-                    calc(var(--mb-animate-timeout) + 0.3s);
-            }
-            &:nth-of-type(2) {
-                top: calc(50% + var(--mb-bar-spacing));
-                opacity: 0;
-                transition-delay: calc(var(--mb-animate-timeout) + 0s),
-                    calc(var(--mb-animate-timeout) + 0.2s);
-            }
-            &:nth-of-type(3) {
-                top: calc(50% - (var(--mb-bar-height) / 2));
-                transform: rotate(-45deg);
-                transition-delay: calc(var(--mb-animate-timeout) + 0.3s),
-                    calc(var(--mb-animate-timeout) + 0.3s);
-            }
-        }
+//	Cross
+#{$mb_module_collapse_cross} {
+  b {
+    &:nth-of-type(1) {
+      bottom: calc(50% - var(--mb-bar-spacing) - var(--mb-bar-height));
+      margin-bottom: calc(var(--mb-bar-spacing) + (var(--mb-bar-height) / 2));
+      transform: rotate(45deg);
+      transition-delay: calc(var(--mb-animate-timeout) + 0.1s),
+        calc(var(--mb-animate-timeout) + 0.3s),
+        calc(var(--mb-animate-timeout) + 0.3s);
     }
+    &:nth-of-type(2) {
+      top: calc(50% + var(--mb-bar-spacing));
+      opacity: 0;
+      transition-delay: calc(var(--mb-animate-timeout) + 0s),
+        calc(var(--mb-animate-timeout) + 0.2s);
+    }
+    &:nth-of-type(3) {
+      top: calc(50% - (var(--mb-bar-height) / 2));
+      transform: rotate(-45deg);
+      transition-delay: calc(var(--mb-animate-timeout) + 0.3s),
+        calc(var(--mb-animate-timeout) + 0.3s);
+    }
+  }
 }

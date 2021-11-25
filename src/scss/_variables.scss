@@ -1,49 +1,37 @@
 /** Selector for the root */
-$mb_root: ':root' !default;
+$mb_root: ":root" !default;
 
 /** Selector for the button. */
-$mb_module: '.mburger' !default;
+$mb_module: ".mburger" !default;
 
-$__opened: '.mm-wrapper_opened';
+$__opened: ".mm-wrapper--opened";
 
 /** Selector for the button with the "collapse" effect. */
-$mb_module_collapse: '#{$mb_module}--collapse' !default;
+$mb_module_collapse: "#{$mb_module}--collapse" !default;
 
 /** Selector for the button with the "spin" effect. */
-$mb_module_spin: '#{$mb_module}--spin' !default;
+$mb_module_spin: "#{$mb_module}--spin" !default;
 
 /** Selector for the button with the "squeeze" effect. */
-$mb_module_squeeze: '#{$mb_module}--squeeze' !default;
+$mb_module_squeeze: "#{$mb_module}--squeeze" !default;
 
 /** Selector for the button with the "tornado" effect. */
-$mb_module_tornado: '#{$mb_module}--tornado' !default;
+$mb_module_tornado: "#{$mb_module}--tornado" !default;
 
 /** Selector for the button when the menu is opened. */
-$mb_module_cross: '#{$__opened} #{$mb_module}' !default;
+$mb_module_cross: "#{$__opened} #{$mb_module}" !default;
 
 /** Selector for the button with the "collapse" effect when the menu is opened. */
-$mb_module_collapse_cross: '#{$__opened} #{$mb_module_collapse}' !default;
+$mb_module_collapse_cross: "#{$__opened} #{$mb_module_collapse}" !default;
 
 /** Selector for the button with the "spin" effect when the menu is opened. */
-$mb_module_spin_cross: '#{$__opened} #{$mb_module_spin}' !default;
+$mb_module_spin_cross: "#{$__opened} #{$mb_module_spin}" !default;
 
 /** Selector for the button with the "squeeze" effect when the menu is opened. */
-$mb_module_squeeze_cross: '#{$__opened} #{$mb_module_squeeze}' !default;
+$mb_module_squeeze_cross: "#{$__opened} #{$mb_module_squeeze}" !default;
 
 /** Selector for the button with the "tornado" effect when the menu is opened. */
-$mb_module_tornado_cross: '#{$__opened} #{$mb_module_tornado}' !default;
+$mb_module_tornado_cross: "#{$__opened} #{$mb_module_tornado}" !default;
 
 /** Timeout before starting the animation, ensures the animation starts after the menu is fully opened. */
 $mb_animate_timeout: 0.4s !default;
-
-/** Whether or not to include the CSS for the "collapse" animation. */
-$mb_fx_collapse: true !default;
-
-/** Whether or not to include the CSS for the "spin" animation. */
-$mb_fx_spin: true !default;
-
-/** Whether or not to include the CSS for the "squeeze" animation. */
-$mb_fx_squeeze: true !default;
-
-/** Whether or not to include the CSS for the "tornado" animation. */
-$mb_fx_tornado: true !default;

@@ -1,5 +1,5 @@
 /*!
- * mburger CSS v1.3.3
+ * mburger CSS
  * mmenujs.com/mburger
  *
  * Copyright (c) Fred Heusschen
@@ -9,10 +9,10 @@
  * http://creativecommons.org/licenses/by/4.0/
  */
 
-@import 'variables';
-@import 'base';
+@import "variables";
+@import "base";
 
-@import 'fx.collapse';
-@import 'fx.spin';
-@import 'fx.squeeze';
-@import 'fx.tornado';
+@import "fx.collapse";
+@import "fx.spin";
+@import "fx.squeeze";
+@import "fx.tornado";
