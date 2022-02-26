@@ -11,7 +11,6 @@ const { src, dest, watch, parallel, series } = require('gulp');
 
 const sass = require('gulp-sass');
 const cleancss = require('gulp-clean-css');
-// const concat = require('gulp-concat');
 const typescript = require('gulp-typescript');
 const replace = require('gulp-replace');
 const fs = require('fs');
