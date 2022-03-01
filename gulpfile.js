@@ -1,71 +1,109 @@
 /*
 	Tasks:
 
-	$ gulp 					: Runs all tasks.
-	$ gulp watch			: Starts a watch on all tasks.
-	$ gulp css				: Runs "css" task.
-	$ gulp webcomponent		: Runs "webcomponent" tasks.
+	$ gulp --handle 	: Build the "handle" component 
+	$ gulp watch	    : Starts a watch on all components. 
+                            Also starts a server at localhost:3000
 */
 
 const { src, dest, watch, parallel, series } = require('gulp');
 
-const sass = require('gulp-sass');
+const sass = require('gulp-sass')(require('sass'));
+const clean = require('gulp-clean');
 const cleancss = require('gulp-clean-css');
 const typescript = require('gulp-typescript');
 const replace = require('gulp-replace');
 const fs = require('fs');
+const connect = require('gulp-connect');
 
-const inputDir = 'src';
-const outputDir = 'dist';
-const binDir = 'bin';
+/** The webcomponent that is currently being build. */
+let build = '';
 
-const css = cb => {
-    return src(inputDir + '/scss/mburger.scss')
+const clear = () => {
+    return src(`dist/${build}`, { 
+        read: false,
+        allowEmpty: true
+    })
+    .pipe(clean());
+}
+
+const css = () => {
+    return src(`src/${build}/index.scss`)
         .pipe(sass().on('error', sass.logError))
-        .pipe(cleancss())
-        .pipe(dest(outputDir));
+        .pipe(cleancss({
+            format: 'keep-breaks'
+        }))
+        .pipe(dest(`tmp/${build}`));
 };
 
-const webcomponentJs = cb => {
-    return src([
-        inputDir + '/ts/*.d.ts', //	Include all typings.
-        inputDir + '/ts/*.ts' // Include the needed ts files.
-    ])
+const html = () => {
+    return src(`src/${build}/index.html`)
+        .pipe(dest(`tmp/${build}`));
+};
+
+const js = () => {
+    return src( `src/${build}/**/*.ts`)
         .pipe(
             typescript({
                 target: 'es6',
                 module: 'es6'
             })
         )
-        .pipe(dest(binDir));
+        .pipe(dest(`tmp/${build}`))
+        .pipe(dest(`dist/${build}`));
 };
 
-const webcomponentCss = cb => {
-    return src(inputDir + '/scss/webcomponent.scss')
-        .pipe(sass().on('error', sass.logError))
-        .pipe(cleancss())
-        .pipe(dest(binDir));
+const concat = () => {
+    const styles = fs.readFileSync(`tmp/${build}/index.css`);
+    const html = fs.readFileSync(`tmp/${build}/index.html`);
+    
+    return src(`tmp/${build}/index.js`)
+        .pipe(replace('<STYLE />', `<style>${styles}</style>`))
+        .pipe(replace('<HTML />', html))
+        .pipe(dest(`dist/${build}`));
 };
 
-const webcomponentConcat = cb => {
-    var styles = fs.readFileSync(binDir + '/webcomponent.css');
-    return src(binDir + '/mburger.js')
-        .pipe(replace('[__STYLES__]', styles))
-        .pipe(dest(outputDir));
+const cleanup = () => {
+    return src('tmp', { 
+            read: false,
+            allowEmpty: true
+        })
+        .pipe(clean());
 };
 
 const webcomponent = series(
-    parallel(webcomponentCss, webcomponentJs),
-    webcomponentConcat
+    clear,
+    parallel(html, css, js),
+    concat,
+    cleanup
 );
 
-const watchTask = cb => {
-    watch(inputDir + '/scss/*.scss', parallel(css, webcomponent));
-    watch(inputDir + '/ts/*.ts', webcomponent);
-    cb();
+exports.default = async cb => {
+    build = process.argv[2];
+
+    if (build) {
+        build = build.replace('--', '');
+    }
+
+    try {
+        if (fs.statSync(`src/${build}`).isDirectory()) {
+            webcomponent()
+        }
+    } catch(err) {
+        console.log('\x1b[31m', `Webcomponent "${build}" not found.`, '\x1b[0m');
+    }
 };
 
-exports.default = parallel(css, webcomponent);
-exports.watch = watchTask;
-exports.css = css;
-exports.webcomponent = webcomponent;
+exports.watch = async cb => {
+    connect.server({
+        port: 3000
+    });
+
+    return watch('src/**/*')
+        .on('change', (path) => {
+            build = path.split('/')[1];
+            console.log('\x1b[32m', 'Change detected to "' + build + '" webcomponent.', '\x1b[0m');
+            webcomponent();
+        });
+    
+};
