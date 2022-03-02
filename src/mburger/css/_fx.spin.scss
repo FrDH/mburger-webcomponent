@@ -16,7 +16,7 @@
     }
 
     //  Cross
-    .bars--cross .bar {
+    .is-cross .bar {
         &--top {
             transform: rotate(135deg);
             transition-delay: calc(var(--mb-animate-timeout) + 0s),

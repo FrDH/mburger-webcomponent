@@ -17,7 +17,7 @@
     }
 
     //  Cross
-    .bars--cross .bar {
+    .is-cross .bar {
         &--top {
             bottom: calc(50% - var(--mb-bar-spacing) - var(--mb-bar-height));
             margin-bottom: calc(

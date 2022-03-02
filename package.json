@@ -9,7 +9,7 @@
 		"type": "git",
 		"url": "https://github.com/FrDH/mburger-css.git"
 	},
-	"description": "A small collection of animated hamburgers. All set up to work out of the box with the mmenu.js and mmnu-light plugins.",
+	"description": "A webcomponent animated hamburgers. All set up to work out of the box with the mmenu.js and mmnu-light plugins.",
 	"keywords": [
 		"hamburger",
 		"icon",

@@ -15,7 +15,7 @@
     }
 
     //  Cross
-    .bars--cross .bar {
+    .is-cross .bar {
         &--top {
             transition-delay: calc(var(--mb-animate-timeout) + 0s),
                 calc(var(--mb-animate-timeout) + 0.1s);

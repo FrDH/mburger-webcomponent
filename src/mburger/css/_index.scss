@@ -38,7 +38,7 @@ button {
 }
 
 //	Hamburger wrapper
-.bars {
+[part="bars"] {
     position: relative;
     display: block;
     width: var(--mb-bar-width);
@@ -77,7 +77,7 @@ button {
 }
 
 //  Cross
-.bars--cross {
+.is-cross {
     .bar {
         &--top {
             bottom: calc(50% - (var(--mb-bar-height) / 2));

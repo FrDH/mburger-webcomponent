@@ -102,20 +102,17 @@ a:hover {
     right: 0;
 }
 
-.xmpl .custom-button-1 {
-    padding: 5px 25px 5px 15px;
-    background-color: rgba(255, 255, 255, 0.7);
-    color: #3ea7e1;
-    border-radius: 30px;
-    white-space: nowrap;
-}
-.xmpl .custom-burger-1 {
+.custom-burger-1 {
     --mb-bar-height: 5px;
     --mb-bar-spacing: 5px;
+
+    padding: 10px 15px;
+    border-radius: 10px;
+    border: 2px solid #fff;
 }
-.xmpl .custom-burger-2 {
+
+.custom-burger-2 {
     --mb-bar-width: 50px;
-    /* --mb-bar-width: 0.5; */
     --mb-bar-height: 2px;
     --mb-bar-spacing: 12px;
 

@@ -1,4 +1,4 @@
-# mburger CSS
+# mburger
 
 A webcomponent for animated hamburgers,
 all set up to work out of the box with the mmenu.js and mmenu-light plugins.<br />

@@ -25,7 +25,7 @@ export default class extends HTMLElement {
         //	Attach shadowRoot
         this.attachShadow({ mode: 'open' });
         this.shadowRoot.appendChild(template.content.cloneNode(true));
-        __classPrivateFieldSet(this, _barsNode, this.shadowRoot.querySelector('.bars'), "f");
+        __classPrivateFieldSet(this, _barsNode, this.shadowRoot.querySelector('[part="bars"]'), "f");
     }
     static get observedAttributes() {
         return ['mmenu'];
@@ -41,14 +41,13 @@ export default class extends HTMLElement {
                 return;
             }
             __classPrivateFieldSet(this, _menuNode, menuNode, "f");
-            if (menuNode.matches('.mm, .mm-menu')) {
-                /** Class that indicates the menu is opened. */
-                let openClass = 'mm-menu--opened';
-                // for mmenu-light
-                if (menuNode.matches('.mm')) {
-                    openClass = 'mm--open';
-                }
-                this.connectMenu('class', openClass);
+            // for mmenu.js
+            if (menuNode.matches('.mm-menu')) {
+                this.connectMenu('class', () => __classPrivateFieldGet(this, _menuNode, "f").classList.contains('mm-menu--opened'), () => __classPrivateFieldGet(this, _menuNode, "f")['mmApi'].open(), () => __classPrivateFieldGet(this, _menuNode, "f")['mmApi'].close());
+            }
+            // for mmenu-light
+            else if (menuNode.matches('.mm')) {
+                this.connectMenu('class', () => __classPrivateFieldGet(this, _menuNode, "f").classList.contains('mm--open'), () => __classPrivateFieldGet(this, _menuNode, "f").classList.add('mm--open'), () => __classPrivateFieldGet(this, _menuNode, "f").classList.remove('mm--open'));
             }
         }
     }
@@ -61,42 +60,36 @@ export default class extends HTMLElement {
      * @param {string} state The state to set, either "cross" or "bars".
      */
     set state(state) {
-        __classPrivateFieldGet(this, _barsNode, "f").classList[state === 'cross' ? 'add' : 'remove']('bars--cross');
+        __classPrivateFieldGet(this, _barsNode, "f").classList[state === 'cross' ? 'add' : 'remove']('is-cross');
     }
     /**
      * Get the icons tate.
+     * @returns {string} The state of the icon, can be "cross" or "bars".
      */
     get state() {
-        return __classPrivateFieldGet(this, _barsNode, "f").matches('.bars--cross') ? 'cross' : 'bars';
+        return __classPrivateFieldGet(this, _barsNode, "f").matches('.is-cross') ? 'cross' : 'bars';
     }
     /**
      * Connect the hamburger to a menu
-     * @param {string} attributeName    The attribute to observe / alter.
-     * @param {string} attributeValue   Value for the attribute.
+     * @param {string} attribute The attribute to observe.
+     * @param {Function} isOpen Function to test whether or not the menu is opened.
+     * @param {Function} open Function that opens the menu.
+     * @param {Function} close Function that closes the menu.
      */
-    connectMenu(attributeName, attributeValue) {
+    connectMenu(attribute, isOpen, open, close) {
         if (!__classPrivateFieldGet(this, _menuNode, "f")) {
             return;
         }
         //  Remove previous.
         __classPrivateFieldGet(this, _instances, "m", _disconnectMenu).call(this);
+        /** Set the state for the hamburber. */
         const setState = () => {
-            /** Whether or not the menu is opened. */
-            let isOpen;
-            switch (attributeName) {
-                case 'class':
-                    isOpen = __classPrivateFieldGet(this, _menuNode, "f").classList.contains(attributeValue);
-                    break;
-                default:
-                    isOpen = __classPrivateFieldGet(this, _menuNode, "f").getAttribute(attributeName) === attributeValue;
-                    break;
-            }
-            this.state = isOpen ? 'cross' : 'bars';
+            this.state = isOpen() ? 'cross' : 'bars';
         };
         //  Create new observer.
         __classPrivateFieldSet(this, _menuObserver, new MutationObserver(mutationsList => {
             for (const mutation of mutationsList) {
-                if (mutation.attributeName === attributeName) {
+                if (mutation.attributeName === attribute) {
                     setState();
                 }
             }
@@ -109,18 +102,11 @@ export default class extends HTMLElement {
         setState();
         //  Create new even listener.
         __classPrivateFieldSet(this, _clickEventListener, () => {
-            switch (attributeName) {
-                case 'class':
-                    __classPrivateFieldGet(this, _menuNode, "f").classList[this.state === 'bars' ? 'add' : 'remove'](attributeValue);
-                    break;
-                default:
-                    if (this.state === 'bars') {
-                        __classPrivateFieldGet(this, _menuNode, "f").setAttribute(attributeName, attributeValue);
-                    }
-                    else {
-                        __classPrivateFieldGet(this, _menuNode, "f").removeAttribute(attributeName);
-                    }
-                    break;
+            if (this.state === 'bars') {
+                close();
+            }
+            else {
+                open();
             }
         }, "f");
         // Click the hamburber.
