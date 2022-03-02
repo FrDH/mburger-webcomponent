@@ -3,17 +3,18 @@
     .bar {
         &--top {
             transition: bottom 0.2s ease, transform 0.2s ease;
-            transition-delay: 0.2s;
+            transition-delay: calc(var(--mb-animate-timeout) + 0.2s);
         }
 
         &--middle {
             transition: opacity 0s ease, transform 0.2s ease;
-            transition-delay: 0.1s, 0.1s;
+            transition-delay: calc(var(--mb-animate-timeout) + 0.1s),
+                calc(var(--mb-animate-timeout) + 0.1s);
         }
 
         &--bottom {
             transition: top 0.2s ease, transform 0.2s ease;
-            transition-delay: 0s;
+            transition-delay: var(--mb-animate-timeout);
         }
     }
 
@@ -21,7 +22,7 @@
     .is-cross .bar {
         &--top {
             transform: rotate(-135deg);
-            transition-delay: calc(var(--mb-animate-timeout) + 0s);
+            transition-delay: var(--mb-animate-timeout);
         }
 
         &--middle {

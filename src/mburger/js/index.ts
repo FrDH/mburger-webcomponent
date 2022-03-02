@@ -23,11 +23,11 @@ export default class extends HTMLElement {
     }
 
     static get observedAttributes() {
-        return ['mmenu'];
+        return ['menu'];
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
-        if (name == 'mmenu') {
+        if (name == 'menu') {
 
             if (oldValue) {
                 this.#disconnectMenu();
@@ -63,7 +63,18 @@ export default class extends HTMLElement {
         }
     }
 
-    connectedCallback() {}
+    connectedCallback() {
+        const menu = this.getAttribute('menu');
+        if (menu) {
+
+            // To ensure all JS was fired, a requestAnimationFrame on DOMContentLoaded...
+            document.addEventListener('DOMContentLoaded', () => {
+                requestAnimationFrame(() => {
+                    this.attributeChangedCallback('menu', '', menu);
+                });
+            });
+        }
+    }
 
     disconnectedCallback() {
         this.#disconnectMenu();
@@ -141,9 +152,9 @@ export default class extends HTMLElement {
         //  Create new even listener.
         this.#clickEventListener = () => {
             if (this.state === 'bars') {
-                close();
-            } else {
                 open();
+            } else {
+                close();
             }
         }
 

@@ -2,31 +2,33 @@
     //  Hamburger
     .bar {
         &--top {
-            transition-delay: 0.1s, 0s;
+            transition-delay: calc(var(--mb-animate-timeout) + 0.1s),
+                var(--mb-animate-timeout);
         }
 
         &--middle {
-            transition-delay: 0.1s;
+            transition-delay: calc(var(--mb-animate-timeout) + 0.1s);
         }
 
         &--bottom {
-            transition-delay: 0.1s, 0s;
+            transition-delay: calc(var(--mb-animate-timeout) + 0.1s),
+                var(--mb-animate-timeout);
         }
     }
 
     //  Cross
     .is-cross .bar {
         &--top {
-            transition-delay: calc(var(--mb-animate-timeout) + 0s),
+            transition-delay: var(--mb-animate-timeout),
                 calc(var(--mb-animate-timeout) + 0.1s);
         }
 
         &--middle {
-            transition-delay: calc(var(--mb-animate-timeout) + 0s);
+            transition-delay: var(--mb-animate-timeout);
         }
 
         &--bottom {
-            transition-delay: calc(var(--mb-animate-timeout) + 0s),
+            transition-delay: var(--mb-animate-timeout),
                 calc(var(--mb-animate-timeout) + 0.1s);
         }
     }

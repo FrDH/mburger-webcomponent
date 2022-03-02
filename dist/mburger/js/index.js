@@ -28,10 +28,10 @@ export default class extends HTMLElement {
         __classPrivateFieldSet(this, _barsNode, this.shadowRoot.querySelector('[part="bars"]'), "f");
     }
     static get observedAttributes() {
-        return ['mmenu'];
+        return ['menu'];
     }
     attributeChangedCallback(name, oldValue, newValue) {
-        if (name == 'mmenu') {
+        if (name == 'menu') {
             if (oldValue) {
                 __classPrivateFieldGet(this, _instances, "m", _disconnectMenu).call(this);
             }
@@ -51,7 +51,13 @@ export default class extends HTMLElement {
             }
         }
     }
-    connectedCallback() { }
+    connectedCallback() {
+        document.addEventListener('DOMContentLoaded', () => {
+            requestAnimationFrame(() => {
+                this.attributeChangedCallback('menu', '', this.getAttribute('menu'));
+            });
+        });
+    }
     disconnectedCallback() {
         __classPrivateFieldGet(this, _instances, "m", _disconnectMenu).call(this);
     }
@@ -103,10 +109,10 @@ export default class extends HTMLElement {
         //  Create new even listener.
         __classPrivateFieldSet(this, _clickEventListener, () => {
             if (this.state === 'bars') {
-                close();
+                open();
             }
             else {
-                open();
+                close();
             }
         }, "f");
         // Click the hamburber.

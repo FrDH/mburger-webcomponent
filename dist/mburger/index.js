@@ -23,28 +23,28 @@ button{display:flex;align-items:center;gap:.75em;padding:0;margin:0;appearance:n
 .is-cross .bar--top{bottom:calc(50% - var(--mb-bar-height)/ 2);transform:rotate(45deg)}
 .is-cross .bar--middle{opacity:0}
 .is-cross .bar--bottom{top:calc(50% - var(--mb-bar-height)/ 2);transform:rotate(-45deg)}
-:host([fx=collapse]) .bar--top{transition:bottom .2s ease,margin .2s ease,transform .2s ease;transition-delay:.2s,0s,0s}
-:host([fx=collapse]) .bar--middle{transition:top .2s ease,opacity 0s ease;transition-delay:.3s,.3s}
-:host([fx=collapse]) .bar--bottom{transition:top .2s ease,transform .2s ease}
+:host([fx=collapse]) .bar--top{transition:bottom .2s ease,margin .2s ease,transform .2s ease;transition-delay:calc(var(--mb-animate-timeout) + .2s),var(--mb-animate-timeout),var(--mb-animate-timeout)}
+:host([fx=collapse]) .bar--middle{transition:top .2s ease,opacity 0s ease;transition-delay:calc(var(--mb-animate-timeout) + .3s),calc(var(--mb-animate-timeout) + .3s)}
+:host([fx=collapse]) .bar--bottom{transition:top .2s ease,transform .2s ease;transition-delay:var(--mb-animate-timeout)}
 :host([fx=collapse]) .is-cross .bar--top{bottom:calc(50% - var(--mb-bar-spacing) - var(--mb-bar-height));margin-bottom:calc(var(--mb-bar-spacing) + var(--mb-bar-height)/ 2);transform:rotate(45deg);transition-delay:calc(var(--mb-animate-timeout) + .1s),calc(var(--mb-animate-timeout) + .3s),calc(var(--mb-animate-timeout) + .3s)}
-:host([fx=collapse]) .is-cross .bar--middle{top:calc(50% + var(--mb-bar-spacing));opacity:0;transition-delay:calc(var(--mb-animate-timeout) + 0s),calc(var(--mb-animate-timeout) + .2s)}
+:host([fx=collapse]) .is-cross .bar--middle{top:calc(50% + var(--mb-bar-spacing));opacity:0;transition-delay:var(--mb-animate-timeout),calc(var(--mb-animate-timeout) + .2s)}
 :host([fx=collapse]) .is-cross .bar--bottom{top:calc(50% - var(--mb-bar-height)/ 2);transform:rotate(-45deg);transition-delay:calc(var(--mb-animate-timeout) + .3s),calc(var(--mb-animate-timeout) + .3s)}
-:host([fx=spin]) .bar--top{transition-delay:.2s,0s}
-:host([fx=spin]) .bar--middle{transition-duration:0s;transition-delay:.2s}
-:host([fx=spin]) .bar--bottom{transition-delay:.2s,0s}
-:host([fx=spin]) .is-cross .bar--top{transform:rotate(135deg);transition-delay:calc(var(--mb-animate-timeout) + 0s),calc(var(--mb-animate-timeout) + .2s)}
-:host([fx=spin]) .is-cross .bar--middle{transition-delay:calc(var(--mb-animate-timeout) + 0s)}
-:host([fx=spin]) .is-cross .bar--bottom{transform:rotate(225deg);transition-delay:calc(var(--mb-animate-timeout) + 0s),calc(var(--mb-animate-timeout) + .2s)}
-:host([fx=squeeze]) .bar--top{transition-delay:.1s,0s}
-:host([fx=squeeze]) .bar--middle{transition-delay:.1s}
-:host([fx=squeeze]) .bar--bottom{transition-delay:.1s,0s}
-:host([fx=squeeze]) .is-cross .bar--top{transition-delay:calc(var(--mb-animate-timeout) + 0s),calc(var(--mb-animate-timeout) + .1s)}
-:host([fx=squeeze]) .is-cross .bar--middle{transition-delay:calc(var(--mb-animate-timeout) + 0s)}
-:host([fx=squeeze]) .is-cross .bar--bottom{transition-delay:calc(var(--mb-animate-timeout) + 0s),calc(var(--mb-animate-timeout) + .1s)}
-:host([fx=tornado]) .bar--top{transition:bottom .2s ease,transform .2s ease;transition-delay:.2s}
-:host([fx=tornado]) .bar--middle{transition:opacity 0s ease,transform .2s ease;transition-delay:.1s,.1s}
-:host([fx=tornado]) .bar--bottom{transition:top .2s ease,transform .2s ease;transition-delay:0s}
-:host([fx=tornado]) .is-cross .bar--top{transform:rotate(-135deg);transition-delay:calc(var(--mb-animate-timeout) + 0s)}
+:host([fx=spin]) .bar--top{transition-delay:calc(var(--mb-animate-timeout) + .2s),var(--mb-animate-timeout)}
+:host([fx=spin]) .bar--middle{transition-duration:0s;transition-delay:calc(var(--mb-animate-timeout) + .2s)}
+:host([fx=spin]) .bar--bottom{transition-delay:calc(var(--mb-animate-timeout) + .2s),var(--mb-animate-timeout)}
+:host([fx=spin]) .is-cross .bar--top{transform:rotate(135deg);transition-delay:var(--mb-animate-timeout),calc(var(--mb-animate-timeout) + .2s)}
+:host([fx=spin]) .is-cross .bar--middle{transition-delay:var(--mb-animate-timeout)}
+:host([fx=spin]) .is-cross .bar--bottom{transform:rotate(225deg);transition-delay:var(--mb-animate-timeout),calc(var(--mb-animate-timeout) + .2s)}
+:host([fx=squeeze]) .bar--top{transition-delay:calc(var(--mb-animate-timeout) + .1s),var(--mb-animate-timeout)}
+:host([fx=squeeze]) .bar--middle{transition-delay:calc(var(--mb-animate-timeout) + .1s)}
+:host([fx=squeeze]) .bar--bottom{transition-delay:calc(var(--mb-animate-timeout) + .1s),var(--mb-animate-timeout)}
+:host([fx=squeeze]) .is-cross .bar--top{transition-delay:var(--mb-animate-timeout),calc(var(--mb-animate-timeout) + .1s)}
+:host([fx=squeeze]) .is-cross .bar--middle{transition-delay:var(--mb-animate-timeout)}
+:host([fx=squeeze]) .is-cross .bar--bottom{transition-delay:var(--mb-animate-timeout),calc(var(--mb-animate-timeout) + .1s)}
+:host([fx=tornado]) .bar--top{transition:bottom .2s ease,transform .2s ease;transition-delay:calc(var(--mb-animate-timeout) + .2s)}
+:host([fx=tornado]) .bar--middle{transition:opacity 0s ease,transform .2s ease;transition-delay:calc(var(--mb-animate-timeout) + .1s),calc(var(--mb-animate-timeout) + .1s)}
+:host([fx=tornado]) .bar--bottom{transition:top .2s ease,transform .2s ease;transition-delay:var(--mb-animate-timeout)}
+:host([fx=tornado]) .is-cross .bar--top{transform:rotate(-135deg);transition-delay:var(--mb-animate-timeout)}
 :host([fx=tornado]) .is-cross .bar--middle{opacity:0;transform:rotate(-135deg);transition-delay:calc(var(--mb-animate-timeout) + .4s),calc(var(--mb-animate-timeout) + .1s)}
 :host([fx=tornado]) .is-cross .bar--bottom{transform:rotate(-225deg);transition-delay:calc(var(--mb-animate-timeout) + .2s)}</style>
     <button>
