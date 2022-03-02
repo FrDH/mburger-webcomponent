@@ -3,27 +3,111 @@
     <head>
         <meta charset="utf-8" />
         <meta name="author" content="www.frebsite.nl" />
-        <meta
-            name="viewport"
-            content="width=device-width minimum-scale=1.0 maximum-scale=1.0 user-scalable=no"
+        <meta name="viewport" content="width=device-width user-scalable=no" />
+        <meta name="robots" content="noindex, nofollow" />
+
+        <title>mburger, animated hamburgers!</title>
+
+        <link
+            type="text/css"
+            rel="stylesheet"
+            href="http://fonts.googleapis.com/css?family=Pacifico"
         />
+        <link type="text/css" rel="stylesheet" href="demo.css" />
 
-        <title>test webcomponent</title>
-
-        <script src="./dist/test/index.js" type="module"></script>
-
-        <style>
-            body {
-                margin: 0;
-            }
-        </style>
+        <script src="./dist/mburger/index.js" type="module"></script>
     </head>
-
     <body>
-        <test-test>
-            <div>1</div>
-            <div>2</div>
-            <div>3</div>
-        </test-test>
+        <div id="page">
+            <h1>mburger</h1>
+            <p>
+                A webcomponent for animated hamburgers. All set up to work out
+                of the box with the mmenu.js and mmenu-light plugins. Click a
+                hamburger to see the animation. More info
+                <a href="https://www.mmenujs.com/mburger" target="_blank"
+                    >here</a
+                >.
+            </p>
+
+            <p>
+                Note: If you want to run these examples locally, you need to run
+                them through a local web server. Otherwise the
+                <code>&lt;script type=&quot;module&quot;&gt;</code> will be
+                blocked by CORS policy.
+            </p>
+
+            <div class="xmpls">
+                <div class="xmpl">
+                    <mm-burger fx="collapse"></mm-burger>
+                    <span>collapse</span>
+                </div>
+                <div class="xmpl">
+                    <mm-burger fx="spin"></mm-burger>
+                    <span>spin</span>
+                </div>
+                <div class="xmpl">
+                    <mm-burger fx="squeeze"></mm-burger>
+                    <span>squeeze</span>
+                </div>
+                <div class="xmpl">
+                    <mm-burger fx="tornado"></mm-burger>
+                    <span>tornado</span>
+                </div>
+            </div>
+
+            <pre>
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;script type="module" src="dist/mburger.js"&gt;&lt;/script&gt;
+    &lt;/heady&gt;
+    &lt;body&gt;
+        &lt;mm-burger fx="spin"&gt;&lt;/mm-burger&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</pre
+            >
+
+            <h3>Customize the hamburger</h3>
+            <p>
+                By default, the hamburger adopts to its environment pretty good,
+                the bars scale to fit and inherit their <code>color</code> for
+                the parent element.
+            </p>
+            <p>
+                The hamburger is pretty easy to customize too, just override
+                some of the CSS values and variables.
+            </p>
+
+            <div class="xmpls">
+                <div class="xmpl">
+                    <mm-burger class="custom-burger-1" fx="spin"
+                        >Menu</mm-burger
+                    >
+                </div>
+
+                <div class="xmpl">
+                    <mm-burger class="custom-burger-2" fx="spin"></mm-burger>
+                </div>
+            </div>
+
+            <p>
+                For more examples and the full documentation, please visit:
+                <a href="https://www.mmenujs.com/mburger" target="_blank"
+                    >mmenujs.com/mburger</a
+                >.
+            </p>
+        </div>
+
+        <script>
+            document.addEventListener("click", (evnt) => {
+                var target = evnt.target;
+                let xmpl = target.closest(".xmpl");
+                if (xmpl) {
+                    let webcomponent = xmpl.querySelector("mm-burger");
+                    webcomponent.state =
+                        webcomponent.state === "cross" ? "bars" : "cross";
+                }
+            });
+        </script>
     </body>
 </html>

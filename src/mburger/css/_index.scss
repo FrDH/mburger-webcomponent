@@ -1,0 +1,101 @@
+:host,
+* {
+    box-sizing: border-box;
+}
+
+:host {
+    /** Width for the button. */
+    --mb-bar-width: 30px;
+
+    /** Height for the bars.*/
+    --mb-bar-height: 3px;
+
+    /** Distance between bars. */
+    --mb-bar-spacing: 7px;
+
+    /** Timeout before starting the animation, for example to starts after the menu is fully opened. */
+    --mb-animate-timeout: 0s;
+
+    display: inline-block;
+    vertical-align: middle;
+    font-size: inherit;
+    color: inherit;
+}
+
+//	Button for accessibility
+button {
+    display: flex;
+    align-items: center;
+    gap: 0.75em;
+    padding: 0;
+    margin: 0;
+    appearance: none;
+    font-size: inherit;
+    background: transparent;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+//	Hamburger wrapper
+.bars {
+    position: relative;
+    display: block;
+    width: var(--mb-bar-width);
+    height: calc((var(--mb-bar-height) * 3) + (var(--mb-bar-spacing) * 2));
+}
+
+//	Hamburger
+.bar {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: var(--mb-bar-height);
+    border-radius: calc(var(--mb-bar-height) / 2);
+    background: currentColor;
+    color: inherit;
+    opacity: 1;
+
+    //	Bar 1
+    &--top {
+        bottom: calc(50% + var(--mb-bar-spacing) + (var(--mb-bar-height) / 2));
+        transition: bottom 0.2s ease, transform 0.2s ease, width 0.2s ease;
+    }
+
+    //	Bar 2
+    &--middle {
+        top: calc(50% - (var(--mb-bar-height) / 2));
+        transition: opacity 0.2s ease;
+    }
+
+    //	Bar 3
+    &--bottom {
+        top: calc(50% + var(--mb-bar-spacing) + (var(--mb-bar-height) / 2));
+        transition: top 0.2s ease, transform 0.2s ease, width 0.2s ease;
+    }
+}
+
+//  Cross
+.bars--cross {
+    .bar {
+        &--top {
+            bottom: calc(50% - (var(--mb-bar-height) / 2));
+            transform: rotate(45deg);
+        }
+
+        &--middle {
+            opacity: 0;
+        }
+
+        &--bottom {
+            top: calc(50% - (var(--mb-bar-height) / 2));
+            transform: rotate(-45deg);
+        }
+    }
+}
+
+@import "fx.collapse";
+@import "fx.spin";
+@import "fx.squeeze";
+@import "fx.tornado";

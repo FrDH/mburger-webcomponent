@@ -1,0 +1,36 @@
+:host([fx="spin"]) {
+    //  Hamburger
+    .bar {
+        &--top {
+            transition-delay: 0.2s, 0s;
+        }
+
+        &--middle {
+            transition-duration: 0s;
+            transition-delay: 0.2s;
+        }
+
+        &--bottom {
+            transition-delay: 0.2s, 0s;
+        }
+    }
+
+    //  Cross
+    .bars--cross .bar {
+        &--top {
+            transform: rotate(135deg);
+            transition-delay: calc(var(--mb-animate-timeout) + 0s),
+                calc(var(--mb-animate-timeout) + 0.2s);
+        }
+
+        &--middle {
+            transition-delay: calc(var(--mb-animate-timeout) + 0s);
+        }
+
+        &--bottom {
+            transform: rotate(225deg);
+            transition-delay: calc(var(--mb-animate-timeout) + 0s),
+                calc(var(--mb-animate-timeout) + 0.2s);
+        }
+    }
+}

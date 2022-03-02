@@ -1,0 +1,46 @@
+:host([fx="collapse"]) {
+    //  Hamburger
+    .bar {
+        &--top {
+            transition: bottom 0.2s ease, margin 0.2s ease, transform 0.2s ease;
+            transition-delay: 0.2s, 0s, 0s;
+        }
+
+        &--middle {
+            transition: top 0.2s ease, opacity 0s ease;
+            transition-delay: 0.3s, 0.3s;
+        }
+
+        &--bottom {
+            transition: top 0.2s ease, transform 0.2s ease;
+        }
+    }
+
+    //  Cross
+    .bars--cross .bar {
+        &--top {
+            bottom: calc(50% - var(--mb-bar-spacing) - var(--mb-bar-height));
+            margin-bottom: calc(
+                var(--mb-bar-spacing) + (var(--mb-bar-height) / 2)
+            );
+            transform: rotate(45deg);
+            transition-delay: calc(var(--mb-animate-timeout) + 0.1s),
+                calc(var(--mb-animate-timeout) + 0.3s),
+                calc(var(--mb-animate-timeout) + 0.3s);
+        }
+
+        &--middle {
+            top: calc(50% + var(--mb-bar-spacing));
+            opacity: 0;
+            transition-delay: calc(var(--mb-animate-timeout) + 0s),
+                calc(var(--mb-animate-timeout) + 0.2s);
+        }
+
+        &--bottom {
+            top: calc(50% - (var(--mb-bar-height) / 2));
+            transform: rotate(-45deg);
+            transition-delay: calc(var(--mb-animate-timeout) + 0.3s),
+                calc(var(--mb-animate-timeout) + 0.3s);
+        }
+    }
+}

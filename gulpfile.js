@@ -19,13 +19,21 @@ const connect = require('gulp-connect');
 /** The webcomponent that is currently being build. */
 let build = '';
 
-const clear = () => {
-    return src(`dist/${build}`, { 
+const cleanup = directory => {
+    return src(`${directory}/${build}`, { 
         read: false,
         allowEmpty: true
     })
     .pipe(clean());
 }
+
+const cleanupDist = () => {
+    return cleanup('dist');
+}
+
+const cleanupTemp = () => {
+    return cleanup('temp');
+};
 
 const css = () => {
     return src(`src/${build}/index.scss`)
@@ -33,12 +41,12 @@ const css = () => {
         .pipe(cleancss({
             format: 'keep-breaks'
         }))
-        .pipe(dest(`tmp/${build}`));
+        .pipe(dest(`temp/${build}`));
 };
 
 const html = () => {
     return src(`src/${build}/index.html`)
-        .pipe(dest(`tmp/${build}`));
+        .pipe(dest(`temp/${build}`));
 };
 
 const js = () => {
@@ -49,33 +57,24 @@ const js = () => {
                 module: 'es6'
             })
         )
-        .pipe(dest(`tmp/${build}`))
         .pipe(dest(`dist/${build}`));
 };
 
 const concat = () => {
-    const styles = fs.readFileSync(`tmp/${build}/index.css`);
-    const html = fs.readFileSync(`tmp/${build}/index.html`);
+    const styles = fs.readFileSync(`temp/${build}/index.css`);
+    const html = fs.readFileSync(`temp/${build}/index.html`);
     
-    return src(`tmp/${build}/index.js`)
+    return src(`dist/${build}/index.js`)
         .pipe(replace('<STYLE />', `<style>${styles}</style>`))
         .pipe(replace('<HTML />', html))
         .pipe(dest(`dist/${build}`));
 };
 
-const cleanup = () => {
-    return src('tmp', { 
-            read: false,
-            allowEmpty: true
-        })
-        .pipe(clean());
-};
-
 const webcomponent = series(
-    clear,
+    cleanupDist,
     parallel(html, css, js),
     concat,
-    cleanup
+    cleanupTemp
 );
 
 exports.default = async cb => {

@@ -1,24 +1,26 @@
 {
-	"name": "webcomponent-boilerplate",
-	"version": "1.0.0",
-	"main": "dist/mburger.css",
-	"module": "dist/mburger.js",
+	"name": "mburger-css",
+	"version": "3.0.0",
+	"main": "dist/mburger/index.js",
+	"module": "dist/mburger/index.js",
 	"author": "Fred Heusschen <info@mmenujs.com>",
 	"license": "CC-BY-4.0",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/FrDH/mburger-css.git"
 	},
-	"description": "A boilerplate for creating webcomponents using TS, SCSS and Gulp.",
+	"description": "A small collection of animated hamburgers. All set up to work out of the box with the mmenu.js and mmnu-light plugins.",
 	"keywords": [
-		"webcomponent",
-		"boilerplate",
-		"ts",
-		"scss",
-		"gulp"
+		"hamburger",
+		"icon",
+		"CSS",
+		"animation",
+		"animated",
+		"menu",
+		"navigation"
 	],
 	"scripts": {
-		"build": "gulp default"
+		"build": "gulp --mburger"
 	},
 	"devDependencies": {
 		"fs": "0.0.1-security",
