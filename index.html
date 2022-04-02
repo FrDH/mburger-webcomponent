@@ -100,7 +100,7 @@
 
         <script>
             document.addEventListener("click", (evnt) => {
-                var target = evnt.target;
+                const target = evnt.target;
                 let xmpl = target.closest(".xmpl");
                 if (xmpl) {
                     let webcomponent = xmpl.querySelector("mm-burger");
