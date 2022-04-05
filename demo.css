@@ -6,7 +6,7 @@ body {
 }
 body {
     position: relative;
-    background-color: #3ea7e1;
+    background-color: #5888aa;
     -webkit-text-size-adjust: none;
     font-family: Arial, Helvetica, Verdana;
     font-size: 20px;
@@ -102,7 +102,11 @@ a:hover {
     right: 0;
 }
 
-.custom-burger-1 {
+mm-burger {
+    padding: 5px;
+}
+
+mm-burger.custom-burger-1 {
     --mb-bar-height: 5px;
     --mb-bar-spacing: 5px;
 
@@ -111,7 +115,7 @@ a:hover {
     border: 2px solid #fff;
 }
 
-.custom-burger-2 {
+mm-burger.custom-burger-2 {
     --mb-bar-width: 50px;
     --mb-bar-height: 2px;
     --mb-bar-spacing: 12px;

@@ -1,5 +1,5 @@
 {
-	"name": "mburger-css",
+	"name": "mburger-webcomponent",
 	"version": "3.0.0",
 	"main": "dist/mburger/index.js",
 	"module": "dist/mburger/index.js",

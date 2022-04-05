@@ -38,19 +38,39 @@
 
             <div class="xmpls">
                 <div class="xmpl">
-                    <mm-burger fx="collapse"></mm-burger>
+                    <mm-burger
+                        fx="collapse"
+                        title="Toggle state"
+                        role="button"
+                        tabindex="0"
+                    ></mm-burger>
                     <span>collapse</span>
                 </div>
                 <div class="xmpl">
-                    <mm-burger fx="spin"></mm-burger>
+                    <mm-burger
+                        fx="spin"
+                        title="Toggle state"
+                        role="button"
+                        tabindex="0"
+                    ></mm-burger>
                     <span>spin</span>
                 </div>
                 <div class="xmpl">
-                    <mm-burger fx="squeeze"></mm-burger>
+                    <mm-burger
+                        fx="squeeze"
+                        title="Toggle state"
+                        role="button"
+                        tabindex="0"
+                    ></mm-burger>
                     <span>squeeze</span>
                 </div>
                 <div class="xmpl">
-                    <mm-burger fx="tornado"></mm-burger>
+                    <mm-burger
+                        fx="tornado"
+                        title="Toggle state"
+                        role="button"
+                        tabindex="0"
+                    ></mm-burger>
                     <span>tornado</span>
                 </div>
             </div>
@@ -67,29 +87,6 @@
 </pre
             >
 
-            <h3>Customize the hamburger</h3>
-            <p>
-                By default, the hamburger adopts to its environment pretty good,
-                the bars scale to fit and inherit their <code>color</code> for
-                the parent element.
-            </p>
-            <p>
-                The hamburger is pretty easy to customize too, just override
-                some of the CSS values and variables.
-            </p>
-
-            <div class="xmpls">
-                <div class="xmpl">
-                    <mm-burger class="custom-burger-1" fx="spin"
-                        >Menu</mm-burger
-                    >
-                </div>
-
-                <div class="xmpl">
-                    <mm-burger class="custom-burger-2" fx="spin"></mm-burger>
-                </div>
-            </div>
-
             <p>
                 For more examples and the full documentation, please visit:
                 <a href="https://www.mmenujs.com/mburger" target="_blank"
@@ -99,13 +96,19 @@
         </div>
 
         <script>
-            document.addEventListener("click", (evnt) => {
-                const target = evnt.target;
-                let xmpl = target.closest(".xmpl");
-                if (xmpl) {
-                    let webcomponent = xmpl.querySelector("mm-burger");
-                    webcomponent.state =
-                        webcomponent.state === "cross" ? "bars" : "cross";
+            const toggle = (event) => {
+                const burger = event.target
+                    ?.closest(".xmpl")
+                    ?.querySelector("mm-burger");
+
+                if (burger) {
+                    burger.state = burger.state === "cross" ? "bars" : "cross";
+                }
+            };
+            document.addEventListener("click", toggle);
+            document.addEventListener("keyup", (event) => {
+                if (event.key === "Enter") {
+                    toggle(event);
                 }
             });
         </script>

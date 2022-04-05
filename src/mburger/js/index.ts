@@ -1,3 +1,10 @@
+const on = (el, ev, cb) => {
+    el.addEventListener(ev, cb);
+    return () => {
+        el.removeEventListener(ev, cb);
+    };
+}
+
 export default class extends HTMLElement {
 
     /** Node for the hamburger bars. */
@@ -9,8 +16,11 @@ export default class extends HTMLElement {
     /** Observer for the menu node. */
     #menuObserver: MutationObserver = null;
 
-    /** Click even listener for the hamburber. */
-    #clickEventListener: EventListener = null;
+    /** Function to remove click even listener for the hamburber. */
+    #offClick: Function = null;
+    
+    /** Function to remove keyUp even listener for the hamburber. */
+    #offKeyup: Function = null;
        
     constructor(template: HTMLTemplateElement) {
         super();
@@ -104,7 +114,8 @@ export default class extends HTMLElement {
         this.#menuObserver?.disconnect();
                 
         //  Remove previous event listener.
-        this.removeEventListener('click', this.#clickEventListener);
+        this.#offClick?.();
+        this.#offKeyup?.();
     }
 
     /**
@@ -132,6 +143,15 @@ export default class extends HTMLElement {
             this.state = isOpen() ? 'cross' : 'bars';
         }
 
+        /** Toggle menu open / close */
+        const toggle = () => {
+            if (this.state === 'bars') {
+                open();
+            } else {
+                close();
+            }
+        }
+
         //  Create new observer.
         this.#menuObserver = new MutationObserver(mutationsList => {
             for(const mutation of mutationsList) {
@@ -149,16 +169,12 @@ export default class extends HTMLElement {
         //  Immediately check menu.
         setState();
 
-        //  Create new even listener.
-        this.#clickEventListener = () => {
-            if (this.state === 'bars') {
-                open();
-            } else {
-                close();
+        // Click / Enter the hamburber.
+        this.#offClick = on(this, 'click' ,toggle);
+        this.#offKeyup = on(this, 'keyup',  (event: KeyboardEvent) => {
+            if (event.key === 'Enter') {
+                toggle();
             }
-        }
-
-        // Click the hamburber.
-        this.addEventListener('click', this.#clickEventListener);
+        });
     }
 }

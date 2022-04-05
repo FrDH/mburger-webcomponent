@@ -3,18 +3,18 @@
     .bar {
         &--top {
             transition: bottom 0.2s ease, transform 0.2s ease;
-            transition-delay: calc(var(--mb-animate-timeout) + 0.2s);
+            transition-delay: calc(var(--mb-animate-delay) + 0.2s);
         }
 
         &--middle {
             transition: opacity 0s ease, transform 0.2s ease;
-            transition-delay: calc(var(--mb-animate-timeout) + 0.1s),
-                calc(var(--mb-animate-timeout) + 0.1s);
+            transition-delay: calc(var(--mb-animate-delay) + 0.1s),
+                calc(var(--mb-animate-delay) + 0.1s);
         }
 
         &--bottom {
             transition: top 0.2s ease, transform 0.2s ease;
-            transition-delay: var(--mb-animate-timeout);
+            transition-delay: var(--mb-animate-delay);
         }
     }
 
@@ -22,19 +22,19 @@
     .is-cross .bar {
         &--top {
             transform: rotate(-135deg);
-            transition-delay: var(--mb-animate-timeout);
+            transition-delay: var(--mb-animate-delay);
         }
 
         &--middle {
             opacity: 0;
             transform: rotate(-135deg);
-            transition-delay: calc(var(--mb-animate-timeout) + 0.4s),
-                calc(var(--mb-animate-timeout) + 0.1s);
+            transition-delay: calc(var(--mb-animate-delay) + 0.4s),
+                calc(var(--mb-animate-delay) + 0.1s);
         }
 
         &--bottom {
             transform: rotate(-225deg);
-            transition-delay: calc(var(--mb-animate-timeout) + 0.2s);
+            transition-delay: calc(var(--mb-animate-delay) + 0.2s);
         }
     }
 }

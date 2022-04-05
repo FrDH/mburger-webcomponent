@@ -9,7 +9,13 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _instances, _barsNode, _menuNode, _menuObserver, _clickEventListener, _disconnectMenu;
+var _instances, _barsNode, _menuNode, _menuObserver, _offClick, _offKeyup, _disconnectMenu;
+const on = (el, ev, cb) => {
+    el.addEventListener(ev, cb);
+    return () => {
+        el.removeEventListener(ev, cb);
+    };
+};
 export default class extends HTMLElement {
     constructor(template) {
         super();
@@ -20,8 +26,10 @@ export default class extends HTMLElement {
         _menuNode.set(this, void 0);
         /** Observer for the menu node. */
         _menuObserver.set(this, null);
-        /** Click even listener for the hamburber. */
-        _clickEventListener.set(this, null);
+        /** Function to remove click even listener for the hamburber. */
+        _offClick.set(this, null);
+        /** Function to remove keyUp even listener for the hamburber. */
+        _offKeyup.set(this, null);
         //	Attach shadowRoot
         this.attachShadow({ mode: 'open' });
         this.shadowRoot.appendChild(template.content.cloneNode(true));
@@ -52,11 +60,15 @@ export default class extends HTMLElement {
         }
     }
     connectedCallback() {
-        document.addEventListener('DOMContentLoaded', () => {
-            requestAnimationFrame(() => {
-                this.attributeChangedCallback('menu', '', this.getAttribute('menu'));
+        const menu = this.getAttribute('menu');
+        if (menu) {
+            // To ensure all JS was fired, a requestAnimationFrame on DOMContentLoaded...
+            document.addEventListener('DOMContentLoaded', () => {
+                requestAnimationFrame(() => {
+                    this.attributeChangedCallback('menu', '', menu);
+                });
             });
-        });
+        }
     }
     disconnectedCallback() {
         __classPrivateFieldGet(this, _instances, "m", _disconnectMenu).call(this);
@@ -92,6 +104,15 @@ export default class extends HTMLElement {
         const setState = () => {
             this.state = isOpen() ? 'cross' : 'bars';
         };
+        /** Toggle menu open / close */
+        const toggle = () => {
+            if (this.state === 'bars') {
+                open();
+            }
+            else {
+                close();
+            }
+        };
         //  Create new observer.
         __classPrivateFieldSet(this, _menuObserver, new MutationObserver(mutationsList => {
             for (const mutation of mutationsList) {
@@ -106,23 +127,20 @@ export default class extends HTMLElement {
         });
         //  Immediately check menu.
         setState();
-        //  Create new even listener.
-        __classPrivateFieldSet(this, _clickEventListener, () => {
-            if (this.state === 'bars') {
-                open();
+        // Click / Enter the hamburber.
+        __classPrivateFieldSet(this, _offClick, on(this, 'click', toggle), "f");
+        __classPrivateFieldSet(this, _offKeyup, on(this, 'keyup', (event) => {
+            if (event.key === 'Enter') {
+                toggle();
             }
-            else {
-                close();
-            }
-        }, "f");
-        // Click the hamburber.
-        this.addEventListener('click', __classPrivateFieldGet(this, _clickEventListener, "f"));
+        }), "f");
     }
 }
-_barsNode = new WeakMap(), _menuNode = new WeakMap(), _menuObserver = new WeakMap(), _clickEventListener = new WeakMap(), _instances = new WeakSet(), _disconnectMenu = function _disconnectMenu() {
-    var _a;
+_barsNode = new WeakMap(), _menuNode = new WeakMap(), _menuObserver = new WeakMap(), _offClick = new WeakMap(), _offKeyup = new WeakMap(), _instances = new WeakSet(), _disconnectMenu = function _disconnectMenu() {
+    var _a, _b, _c;
     //  Disconnect previous observer.
     (_a = __classPrivateFieldGet(this, _menuObserver, "f")) === null || _a === void 0 ? void 0 : _a.disconnect();
     //  Remove previous event listener.
-    this.removeEventListener('click', __classPrivateFieldGet(this, _clickEventListener, "f"));
+    (_b = __classPrivateFieldGet(this, _offClick, "f")) === null || _b === void 0 ? void 0 : _b.call(this);
+    (_c = __classPrivateFieldGet(this, _offKeyup, "f")) === null || _c === void 0 ? void 0 : _c.call(this);
 };

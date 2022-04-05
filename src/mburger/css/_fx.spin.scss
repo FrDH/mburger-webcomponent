@@ -2,18 +2,18 @@
     //  Hamburger
     .bar {
         &--top {
-            transition-delay: calc(var(--mb-animate-timeout) + 0.2s),
-                var(--mb-animate-timeout);
+            transition-delay: calc(var(--mb-animate-delay) + 0.2s),
+                var(--mb-animate-delay);
         }
 
         &--middle {
             transition-duration: 0s;
-            transition-delay: calc(var(--mb-animate-timeout) + 0.2s);
+            transition-delay: calc(var(--mb-animate-delay) + 0.2s);
         }
 
         &--bottom {
-            transition-delay: calc(var(--mb-animate-timeout) + 0.2s),
-                var(--mb-animate-timeout);
+            transition-delay: calc(var(--mb-animate-delay) + 0.2s),
+                var(--mb-animate-delay);
         }
     }
 
@@ -21,18 +21,18 @@
     .is-cross .bar {
         &--top {
             transform: rotate(135deg);
-            transition-delay: var(--mb-animate-timeout),
-                calc(var(--mb-animate-timeout) + 0.2s);
+            transition-delay: var(--mb-animate-delay),
+                calc(var(--mb-animate-delay) + 0.2s);
         }
 
         &--middle {
-            transition-delay: var(--mb-animate-timeout);
+            transition-delay: var(--mb-animate-delay);
         }
 
         &--bottom {
             transform: rotate(225deg);
-            transition-delay: var(--mb-animate-timeout),
-                calc(var(--mb-animate-timeout) + 0.2s);
+            transition-delay: var(--mb-animate-delay),
+                calc(var(--mb-animate-delay) + 0.2s);
         }
     }
 }
