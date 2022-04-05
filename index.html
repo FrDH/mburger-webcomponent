@@ -6,123 +6,29 @@
         <meta name="viewport" content="width=device-width user-scalable=no" />
         <meta name="robots" content="noindex, nofollow" />
 
-        <title>mburger, CSS animated hamburgers!</title>
+        <title>mburger, animated hamburgers!</title>
 
         <link
             type="text/css"
             rel="stylesheet"
             href="http://fonts.googleapis.com/css?family=Pacifico"
         />
-        <link type="text/css" rel="stylesheet" href="bin/demo.css" />
-        <link type="text/css" rel="stylesheet" href="dist/mburger.css" />
+        <link type="text/css" rel="stylesheet" href="demo.css" />
 
-        <script type="module" src="dist/mburger.js"></script>
+        <script src="./dist/mburger/index.js" type="module"></script>
     </head>
     <body>
         <div id="page">
             <h1>mburger</h1>
             <p>
-                A small collection of CSS animated hamburgers. All set up to
-                work out of the box with the mmenu.js plugin. Click a hamburger
-                to see the animation. More info
+                A webcomponent for animated hamburgers. All set up to work out
+                of the box with the mmenu.js and mmenu-light plugins. Click a
+                hamburger to see the animation. More info
                 <a href="https://www.mmenujs.com/mburger" target="_blank"
                     >here</a
                 >.
             </p>
 
-            <div class="xmpls">
-                <div class="xmpl">
-                    <button class="mburger mburger--collapse">
-                        <b></b>
-                        <b></b>
-                        <b></b>
-                    </button>
-                    <span>collapse</span>
-                </div>
-                <div class="xmpl">
-                    <button class="mburger mburger--spin">
-                        <b></b>
-                        <b></b>
-                        <b></b>
-                    </button>
-                    <span>spin</span>
-                </div>
-                <div class="xmpl">
-                    <button class="mburger mburger--squeeze">
-                        <b></b>
-                        <b></b>
-                        <b></b>
-                    </button>
-                    <span>squeeze</span>
-                </div>
-                <div class="xmpl">
-                    <button class="mburger mburger--tornado">
-                        <b></b>
-                        <b></b>
-                        <b></b>
-                    </button>
-                    <span>tornado</span>
-                </div>
-            </div>
-
-            <pre>
-&lt;html&gt;
-   &lt;head&gt;
-      &lt;style type="text/css" rel="stylesheet" href="dist/mburger.css"&gt;
-   &lt;/heady&gt;
-   &lt;body&gt;
-      &lt;button class="mburger mburger--spin" href="#my-menu"&gt;
-         &lt;b&lt;/b&gt;
-         &lt;b&lt;/b&gt;
-         &lt;b&lt;/b&gt;
-      &lt;/button&gt;
-   &lt;/body&gt;
-&lt;/html&gt;
-</pre
-            >
-
-            <h3>Customize the hamburger</h3>
-            <p>
-                By default, the hamburger adopts to its environment pretty good,
-                the bars scale to fit and inherit their <code>color</code> for
-                the parent element.
-            </p>
-            <p>
-                The hamburger is pretty easy to customize too, just override
-                some of the CSS values and variables.
-            </p>
-
-            <div class="xmpls">
-                <div class="xmpl">
-                    <button class="reset custom-button-1">
-                        <span class="mburger mburger--spin">
-                            <b></b>
-                            <b></b>
-                            <b></b>
-                            <span>Menu</span>
-                        </span>
-                    </button>
-                </div>
-
-                <div class="xmpl">
-                    <button class="custom-button-2 mburger mburger--spin">
-                        <b></b>
-                        <b></b>
-                        <b></b>
-                    </button>
-                </div>
-            </div>
-
-            <p>
-                For more examples and the full documentation, please visit:
-                <a href="https://www.mmenujs.com/mburger" target="_blank"
-                    >mmenujs.com/mburger</a
-                >.
-            </p>
-
-            <br />
-
-            <h3>Native webcomponent</h3>
             <p>
                 Note: If you want to run these examples locally, you need to run
                 them through a local web server. Otherwise the
@@ -132,44 +38,77 @@
 
             <div class="xmpls">
                 <div class="xmpl">
-                    <m-burger fx="collapse"></m-burger>
+                    <mm-burger
+                        fx="collapse"
+                        title="Toggle state"
+                        role="button"
+                        tabindex="0"
+                    ></mm-burger>
                     <span>collapse</span>
                 </div>
-
                 <div class="xmpl">
-                    <m-burger fx="spin"></m-burger>
+                    <mm-burger
+                        fx="spin"
+                        title="Toggle state"
+                        role="button"
+                        tabindex="0"
+                    ></mm-burger>
                     <span>spin</span>
+                </div>
+                <div class="xmpl">
+                    <mm-burger
+                        fx="squeeze"
+                        title="Toggle state"
+                        role="button"
+                        tabindex="0"
+                    ></mm-burger>
+                    <span>squeeze</span>
+                </div>
+                <div class="xmpl">
+                    <mm-burger
+                        fx="tornado"
+                        title="Toggle state"
+                        role="button"
+                        tabindex="0"
+                    ></mm-burger>
+                    <span>tornado</span>
                 </div>
             </div>
 
             <pre>
 &lt;html&gt;
-   &lt;head&gt;
-      &lt;script type="module" src="dist/mburger.js"&gt;&lt;/script&gt;
-   &lt;/heady&gt;
-   &lt;body&gt;
-      &lt;m-burger fx="spin" menu="my-menu"&gt;&lt;/m-burger&gt;
-   &lt;/body&gt;
+    &lt;head&gt;
+        &lt;script type="module" src="dist/mburger.js"&gt;&lt;/script&gt;
+    &lt;/heady&gt;
+    &lt;body&gt;
+        &lt;mm-burger fx="spin"&gt;&lt;/mm-burger&gt;
+    &lt;/body&gt;
 &lt;/html&gt;
 </pre
             >
+
+            <p>
+                For more examples and the full documentation, please visit:
+                <a href="https://www.mmenujs.com/mburger" target="_blank"
+                    >mmenujs.com/mburger</a
+                >
+            </p>
         </div>
 
         <script>
-            document.addEventListener("click", (evnt) => {
-                var target = evnt.target;
-                let xmpl = target.closest(".xmpl");
-                if (xmpl) {
-                    let webcomponent = xmpl.querySelector("m-burger");
-                    if (webcomponent) {
-                        if (webcomponent.getAttribute("state")) {
-                            webcomponent.removeAttribute("state");
-                        } else {
-                            webcomponent.setAttribute("state", "cross");
-                        }
-                    } else {
-                        xmpl.classList.toggle("mm-wrapper--opened");
-                    }
+            const toggle = (event) => {
+                const burger = event.target
+                    ?.closest(".xmpl")
+                    ?.querySelector("mm-burger");
+
+                if (burger) {
+                    burger.state = burger.state === "cross" ? "bars" : "cross";
+                }
+            };
+            document.addEventListener("click", toggle);
+            document.addEventListener("keyup", (event) => {
+                if (event.key === "Enter") {
+                    toggle(event);
                 }
             });
         </script>

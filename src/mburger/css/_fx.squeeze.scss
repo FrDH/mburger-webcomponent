@@ -1,0 +1,35 @@
+:host([fx="squeeze"]) {
+    //  Hamburger
+    .bar {
+        &--top {
+            transition-delay: calc(var(--mb-animate-delay) + 0.1s),
+                var(--mb-animate-delay);
+        }
+
+        &--middle {
+            transition-delay: calc(var(--mb-animate-delay) + 0.1s);
+        }
+
+        &--bottom {
+            transition-delay: calc(var(--mb-animate-delay) + 0.1s),
+                var(--mb-animate-delay);
+        }
+    }
+
+    //  Cross
+    .is-cross .bar {
+        &--top {
+            transition-delay: var(--mb-animate-delay),
+                calc(var(--mb-animate-delay) + 0.1s);
+        }
+
+        &--middle {
+            transition-delay: var(--mb-animate-delay);
+        }
+
+        &--bottom {
+            transition-delay: var(--mb-animate-delay),
+                calc(var(--mb-animate-delay) + 0.1s);
+        }
+    }
+}
