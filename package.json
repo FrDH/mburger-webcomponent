@@ -7,7 +7,7 @@
 	"license": "CC-BY-4.0",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/FrDH/mburger-css.git"
+		"url": "https://github.com/FrDH/mburger-webcomponent.git"
 	},
 	"description": "A webcomponent animated hamburgers. All set up to work out of the box with the mmenu.js and mmnu-light plugins.",
 	"keywords": [
