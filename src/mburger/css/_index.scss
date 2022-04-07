@@ -13,8 +13,14 @@
     /** Distance between bars. */
     --mb-bar-spacing: 7px;
 
+    /** Basic animation timing function. */
+    --mb-animation-function: ease;
+
+    /** Animation duration. */
+    --mb-animation-duration: 0.25s;
+
     /** Timeout before starting the animation, for example to starts after the menu is fully opened. */
-    --mb-animate-delay: 0s;
+    --mb-animation-delay: 0s;
 
     display: inline-flex;
     align-items: center;
@@ -26,6 +32,22 @@
     border: unset;
     background: none;
     cursor: pointer;
+}
+
+:host([animation="elastic"]) {
+    --mb-animation-function: cubic-bezier(.5,-0.35,.35,1.5);
+    --mb-animation-duration: 0.35s;
+}
+
+:host([animation="funky"]) {
+    --mb-animation-function: cubic-bezier(0,1.45,.5,1.45);
+    --mb-animation-duration: 0.4s;
+}
+
+:host([animation="shaky"]) {
+    --mb-animation-function: cubic-bezier(.15,.33,1,-0.81);
+    --mb-animation-function: cubic-bezier(0,.5,1,-1);
+    --mb-animation-duration: 0.45s;
 }
 
 //	Hamburger wrapper
@@ -48,22 +70,24 @@
     color: inherit;
     opacity: 1;
 
+    transition: none var(--mb-animation-duration) var(--mb-animation-function) var(--mb-animation-delay);
+    
     //	Bar 1
     &--top {
         bottom: calc(50% + var(--mb-bar-spacing) + (var(--mb-bar-height) / 2));
-        transition: bottom 0.2s ease, transform 0.2s ease, width 0.2s ease;
+        transition-property: bottom, transform;
     }
 
     //	Bar 2
     &--middle {
         top: calc(50% - (var(--mb-bar-height) / 2));
-        transition: opacity 0.2s ease;
+        transition-property: opacity;
     }
 
     //	Bar 3
     &--bottom {
         top: calc(50% + var(--mb-bar-spacing) + (var(--mb-bar-height) / 2));
-        transition: top 0.2s ease, transform 0.2s ease, width 0.2s ease;
+        transition-property: top, transform;
     }
 }
 

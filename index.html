@@ -36,6 +36,15 @@
                 blocked by CORS policy.
             </p>
 
+            <br />
+            <p>Choose an animation for the examples:</p>
+            <select id="animation">
+                <option value="ease">Ease (default)</option>
+                <option value="elastic">Elastic</option>
+                <option value="funky">Funky</option>
+                <option value="shaky">Shaky</option>
+            </select>
+
             <div class="xmpls">
                 <div class="xmpl">
                     <mm-burger
@@ -110,6 +119,16 @@
                 if (event.key === "Enter") {
                     toggle(event);
                 }
+            });
+        </script>
+
+        <script>
+            const burgers = document.querySelectorAll("mm-burger");
+            const select = document.querySelector("#animation");
+            select.addEventListener("change", () => {
+                burgers.forEach((burger) => {
+                    burger.setAttribute("animation", select.value);
+                });
             });
         </script>
     </body>

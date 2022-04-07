@@ -2,34 +2,38 @@
     //  Hamburger
     .bar {
         &--top {
-            transition-delay: calc(var(--mb-animate-delay) + 0.1s),
-                var(--mb-animate-delay);
+            transition-delay: 
+                calc(var(--mb-animation-delay) + (var(--mb-animation-duration) * 0.4)),
+                var(--mb-animation-delay);
         }
 
         &--middle {
-            transition-delay: calc(var(--mb-animate-delay) + 0.1s);
+            transition-delay: calc(var(--mb-animation-delay) + 0.1s);
         }
 
         &--bottom {
-            transition-delay: calc(var(--mb-animate-delay) + 0.1s),
-                var(--mb-animate-delay);
+            transition-delay: 
+                calc(var(--mb-animation-delay) + (var(--mb-animation-duration) * 0.4)),
+                var(--mb-animation-delay);
         }
     }
 
     //  Cross
     .is-cross .bar {
         &--top {
-            transition-delay: var(--mb-animate-delay),
-                calc(var(--mb-animate-delay) + 0.1s);
+            transition-delay: 
+                var(--mb-animation-delay),
+                calc(var(--mb-animation-delay) + (var(--mb-animation-duration) * 0.4));
         }
 
         &--middle {
-            transition-delay: var(--mb-animate-delay);
+            transition-delay: var(--mb-animation-delay);
         }
 
         &--bottom {
-            transition-delay: var(--mb-animate-delay),
-                calc(var(--mb-animate-delay) + 0.1s);
+            transition-delay: 
+                var(--mb-animation-delay),
+                calc(var(--mb-animation-delay) + (var(--mb-animation-duration) * 0.4));
         }
     }
 }

@@ -2,20 +2,25 @@
     //  Hamburger
     .bar {
         &--top {
-            transition: bottom 0.2s ease, margin 0.2s ease, transform 0.2s ease;
-            transition-delay: calc(var(--mb-animate-delay) + 0.2s),
-                var(--mb-animate-delay), var(--mb-animate-delay);
+            transition-property: bottom, margin, transform;
+            transition-delay: 
+                calc(var(--mb-animation-delay) + var(--mb-animation-duration)),
+                var(--mb-animation-delay), 
+                var(--mb-animation-delay);
         }
 
         &--middle {
-            transition: top 0.2s ease, opacity 0s ease;
-            transition-delay: calc(var(--mb-animate-delay) + 0.3s),
-                calc(var(--mb-animate-delay) + 0.3s);
+            transition-property: top, opacity;
+            transition-duration:
+                var(--mb-animation-duration),
+                0s;
+            transition-delay: 
+                calc(var(--mb-animation-delay) + (var(--mb-animation-duration) * 1.3)),
+                calc(var(--mb-animation-delay) + (var(--mb-animation-duration) * 1.3));
         }
 
         &--bottom {
-            transition: top 0.2s ease, transform 0.2s ease;
-            transition-delay: var(--mb-animate-delay);
+            transition-delay: var(--mb-animation-delay);
         }
     }
 
@@ -23,27 +28,31 @@
     .is-cross .bar {
         &--top {
             bottom: calc(50% - var(--mb-bar-spacing) - var(--mb-bar-height));
-            margin-bottom: calc(
-                var(--mb-bar-spacing) + (var(--mb-bar-height) / 2)
-            );
+            margin-bottom: calc(var(--mb-bar-spacing) + (var(--mb-bar-height) / 2));
             transform: rotate(45deg);
-            transition-delay: calc(var(--mb-animate-delay) + 0.1s),
-                calc(var(--mb-animate-delay) + 0.3s),
-                calc(var(--mb-animate-delay) + 0.3s);
+            transition-delay: 
+                calc(var(--mb-animation-delay) + (var(--mb-animation-duration) * 0.3)),
+                calc(var(--mb-animation-delay) + (var(--mb-animation-duration) * 1.3)),
+                calc(var(--mb-animation-delay) + (var(--mb-animation-duration) * 1.3));
         }
 
         &--middle {
             top: calc(50% + var(--mb-bar-spacing));
             opacity: 0;
-            transition-delay: var(--mb-animate-delay),
-                calc(var(--mb-animate-delay) + 0.2s);
+            transition-duration:
+                var(--mb-animation-duration),
+                0s;
+            transition-delay: 
+                var(--mb-animation-delay),
+                calc(var(--mb-animation-delay) + var(--mb-animation-duration));
         }
 
         &--bottom {
             top: calc(50% - (var(--mb-bar-height) / 2));
             transform: rotate(-45deg);
-            transition-delay: calc(var(--mb-animate-delay) + 0.3s),
-                calc(var(--mb-animate-delay) + 0.3s);
+            transition-delay: 
+                calc(var(--mb-animation-delay) + (var(--mb-animation-duration) * 1.3)),
+                calc(var(--mb-animation-delay) + (var(--mb-animation-duration) * 1.3));
         }
     }
 }

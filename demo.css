@@ -13,6 +13,7 @@ body {
     line-height: 30px;
     color: #fff;
 }
+
 h1 {
     margin: 0 0 100px;
     text-shadow: 8px 10px 1px rgba(0, 0, 0, 0.1);
@@ -37,6 +38,15 @@ pre {
         font-size: 105px;
         letter-spacing: -2px;
     }
+}
+
+select {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    border: unset;
+    border-radius: 5px;
+    background: #ffffff99;
 }
 
 a,
