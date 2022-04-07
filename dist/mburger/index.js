@@ -14,9 +14,9 @@ const template = document.createElement('template');
 template.innerHTML = `
     <style>*,:host{box-sizing:border-box}
 :host{--mb-bar-width:30px;--mb-bar-height:3px;--mb-bar-spacing:7px;--mb-animation-function:ease;--mb-animation-duration:0.25s;--mb-animation-delay:0s;display:inline-flex;align-items:center;gap:.75em;padding:0;margin:0;font-size:inherit;color:inherit;border:unset;background:0 0;cursor:pointer}
-:host([animation=elastic]){--mb-animation-function:cubic-bezier(.5,-0.35,.35,1.5);--mb-animation-duration:0.35s}
-:host([animation=funky]){--mb-animation-function:cubic-bezier(0,1.45,.5,1.45);--mb-animation-duration:0.4s}
-:host([animation=shaky]){--mb-animation-function:cubic-bezier(.15,.33,1,-0.81);--mb-animation-function:cubic-bezier(0,.5,1,-1);--mb-animation-duration:0.45s}
+:host([ease=elastic]){--mb-animation-function:cubic-bezier(.5,-0.35,.35,1.5);--mb-animation-duration:0.35s}
+:host([ease=funky]){--mb-animation-function:cubic-bezier(0,1.45,.5,1.45);--mb-animation-duration:0.4s}
+:host([ease=shaky]){--mb-animation-function:cubic-bezier(.15,.33,1,-0.81);--mb-animation-function:cubic-bezier(0,.5,1,-1);--mb-animation-duration:0.45s}
 [part=bars]{position:relative;display:block;width:var(--mb-bar-width);height:calc(var(--mb-bar-height) * 3 + var(--mb-bar-spacing) * 2)}
 .bar{display:block;position:absolute;left:0;right:0;height:var(--mb-bar-height);border-radius:calc(var(--mb-bar-height)/ 2);background:currentColor;color:inherit;opacity:1;transition:none var(--mb-animation-duration) var(--mb-animation-function) var(--mb-animation-delay)}
 .bar--top{bottom:calc(50% + var(--mb-bar-spacing) + var(--mb-bar-height)/ 2);transition-property:bottom,transform}

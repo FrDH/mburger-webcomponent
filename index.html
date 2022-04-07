@@ -38,7 +38,7 @@
 
             <br />
             <p>Choose an animation for the examples:</p>
-            <select id="animation">
+            <select id="ease">
                 <option value="ease">Ease (default)</option>
                 <option value="elastic">Elastic</option>
                 <option value="funky">Funky</option>
@@ -124,10 +124,10 @@
 
         <script>
             const burgers = document.querySelectorAll("mm-burger");
-            const select = document.querySelector("#animation");
+            const select = document.querySelector("#ease");
             select.addEventListener("change", () => {
                 burgers.forEach((burger) => {
-                    burger.setAttribute("animation", select.value);
+                    burger.setAttribute("ease", select.value);
                 });
             });
         </script>

@@ -34,17 +34,17 @@
     cursor: pointer;
 }
 
-:host([animation="elastic"]) {
+:host([ease="elastic"]) {
     --mb-animation-function: cubic-bezier(.5,-0.35,.35,1.5);
     --mb-animation-duration: 0.35s;
 }
 
-:host([animation="funky"]) {
+:host([ease="funky"]) {
     --mb-animation-function: cubic-bezier(0,1.45,.5,1.45);
     --mb-animation-duration: 0.4s;
 }
 
-:host([animation="shaky"]) {
+:host([ease="shaky"]) {
     --mb-animation-function: cubic-bezier(.15,.33,1,-0.81);
     --mb-animation-function: cubic-bezier(0,.5,1,-1);
     --mb-animation-duration: 0.45s;
