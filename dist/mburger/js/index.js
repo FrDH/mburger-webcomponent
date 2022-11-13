@@ -44,7 +44,7 @@ export default class extends HTMLElement {
                 __classPrivateFieldGet(this, _instances, "m", _disconnectMenu).call(this);
             }
             /** Node for the new menu. */
-            const menuNode = document.querySelector(`#${newValue}`);
+            const menuNode = document.querySelector(`#mm-${newValue}, #${newValue}`);
             if (!menuNode) {
                 return;
             }
