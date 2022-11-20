@@ -44,7 +44,10 @@ export default class extends HTMLElement {
             }
 
             /** Node for the new menu. */
-            const menuNode: HTMLElement = document.querySelector(`#mm-${newValue}, #${newValue}`);
+            const menuNode: HTMLElement = 
+                document.querySelector(`#mm-${newValue}`) || 
+                document.querySelector(`#${newValue}`);
+            
             if (!menuNode) {
                 return;
             }
