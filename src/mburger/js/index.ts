@@ -45,6 +45,7 @@ export default class extends HTMLElement {
 
             /** Node for the new menu. */
             const menuNode: HTMLElement = 
+                document.querySelector(`#mm-clone-${newValue}`) || 
                 document.querySelector(`#mm-${newValue}`) || 
                 document.querySelector(`#${newValue}`);
             

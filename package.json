@@ -1,6 +1,6 @@
 {
 	"name": "mburger-webcomponent",
-	"version": "3.1.3",
+	"version": "3.1.4",
 	"main": "dist/mburger/index.js",
 	"module": "dist/mburger/index.js",
 	"author": "Fred Heusschen <info@mmenujs.com>",
